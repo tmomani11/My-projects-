@@ -20,7 +20,7 @@ class Model{
     // @return The translated consonant as a string.
     static std::string translateSingleConsonant(char c);
 
-    // Translates a single vowel character.
+     // Translates a single vowel character.
     // @param c The vowel to translate.
     // @return The translated vowel as a string.
     static std::string translateSingleVowel(char c);

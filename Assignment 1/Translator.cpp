@@ -33,7 +33,7 @@ string Translator::translateEnglishWord(string word){
             }
         }
         else{
-            //character not changed if not vowel or constant
+            //character not changed if not vowel or Constant
             result += i;
         }
     }
