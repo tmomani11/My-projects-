@@ -23,10 +23,12 @@ Model::~Model(){}
  *  char c: the consonant to be checked
  */
 bool Model::CheckConsonant(char c) {
-      return ((c >= 'A' && c <= 'Z' && c != 'A' && c != 'E' &&
-               c != 'I' && c != 'O' && c != 'U') ||
-              (c >= 'a' && c <= 'z' && c != 'a' && c != 'e' &&
-               c != 'i' && c != 'o' && c != 'u'));
+    c = std::tolower(c);  // Convert 'c' to lowercase
+
+    return (
+            // Check if 'c' is a consonant (not a, e, i, o, u)
+            (c >= 'a' && c <= 'z' && c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u')
+    );
 }
 
 

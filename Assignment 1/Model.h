@@ -12,13 +12,23 @@
 #include <string>
 class Model{
     public:
-        Model();//constructor
-        virtual ~Model();//destructor
+    Model(); // Default constructor
+    virtual ~Model(); // Virtual destructor
 
-        static std::string translateSingleConsonant(char c);
-        static std::string translateSingleVowel(char c);
+    // Translates a single consonant character.
+    // @param c The consonant to translate.
+    // @return The translated consonant as a string.
+    static std::string translateSingleConsonant(char c);
+
+    // Translates a single vowel character.
+    // @param c The vowel to translate.
+    // @return The translated vowel as a string.
+    static std::string translateSingleVowel(char c);
 
 private:
-        static bool CheckConsonant(char c);
+    // Checks if a character is a consonant.
+    // @param c The character to check.
+    // @return True if the character is a consonant, false otherwise.
+    static bool CheckConsonant(char c);
 };
 #endif

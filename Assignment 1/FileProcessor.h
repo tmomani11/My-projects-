@@ -14,7 +14,7 @@
 class FileProcessor{
     public:
         FileProcessor();
-        virtual~FileProcessor();
+        virtual ~FileProcessor();
         void processFile(std::string inputFile,std::string outputFile);
 
     private:
