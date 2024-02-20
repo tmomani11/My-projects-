@@ -1,16 +1,7 @@
-/*
- * Tyler Momani
- * 2455776
- * momani@chapman.edu
- * CPSC 350-02
- * Assignment 1: Robber Language Translation
- */
-
 #include "FileProcessor.h"
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <sstream>
 
 FileProcessor::FileProcessor(){}
 FileProcessor::~FileProcessor(){}
@@ -22,48 +13,40 @@ FileProcessor::~FileProcessor(){}
  *  string inputFile:   name of the file to read the input
  *  string outputFile:  name of the file to output to
  */
-void FileProcessor::processFile(std::string inputFile,std::string outputFile) {
- std::ifstream fin;
- std::ofstream fout;
- std::stringstream buffer;
- std::string original;
- std::string rovarspraket;
+void FileProcessor::processFile(std::string inputFile, std::string outputFile) {
 
- // Open input file
- fin.open(inputFile);
- if (!fin.is_open()) {
-  std::cerr << "Error: Unable to open input file: " << inputFile << std::endl;
-  return;
- }
+    std::string sentence;
+    std::fstream my_file;
+    std::string translatedSentence;
+    std::ofstream outFile(outputFile);
 
- // Read the content of the input file into a stringstream
- buffer << fin.rdbuf();
+    if (!outFile.is_open()) {
+        std::cerr << "Error: Unable to open output file: " << outputFile << std::endl;
+        return;
+    }
+    outFile << "<!DOCTYPE html>\n";
+    outFile << " <html> <head> <title> Robbers Translation </title> </head> <body>"  << std::endl;
 
- // Close the input file
- fin.close();
+    my_file.open(inputFile, std::ios::in);
+    if (!my_file.is_open()) {
+        std::cerr << "Error: Unable to open input file: " << inputFile << std::endl;
+        return;
+    }
+    while(getline(my_file,sentence))
+    {
+        outFile << "<p><b>" << sentence << "</b></p>\n";
 
- // Get the original English text from the stringstream
- original = buffer.str();
+        // Translate the current sentence to Rövarspråket
+        std::string translated = Translator::translateEnglishSentence(sentence);
 
- // Perform Rövarspråket translation using your Translator class or function
- rovarspraket = Translator::translateEnglishSentence(original);
+        // Append the translated sentence to the overall translatedSentence
+        translatedSentence += "<br>" + translated + "<br>\n";
+    }
 
- // Open output file
- fout.open(outputFile);
- if (!fout.is_open()) {
-  std::cerr << "Error: Unable to open output file: " << outputFile << std::endl;
-  return;
- }
+    outFile << "<p><i>" << translatedSentence << "</i></p>" << std::endl;
+    outFile << "</body> </html>" << std::endl;
 
- // Write HTML content to the output file
- fout << "<html>\n<head>\n<title>Rövarspråket Translation</title>\n</head>\n<body>\n";
- fout << "<p><b>Original English Text:</b></p>\n";
- fout << "<p>" << original << "</p>\n";
- fout << "<br>\n";
- fout << "<p><i>Rövarspråket Translation:</i></p>\n";
- fout << "<p><i>" << rovarspraket << "</i></p>\n";
- fout << "</body>\n</html>";
+    my_file.close();
+    outFile.close();
 
- // Close the output file
- fout.close();
 }
