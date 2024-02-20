@@ -1,10 +1,3 @@
-/*
- * Tyler Momani
- * 2455776
- * momani@chapman.edu
- * CPSC 350-01
- * Assignment 1: Robber Language Translation
- */
 #include "Model.h"
 #include <string>
 #include <cctype>
@@ -12,9 +5,6 @@ using namespace std;
 
 Model::Model(){}
 Model::~Model(){}
-
-
-
 
 /* CheckConsonant()
  * Encodes a consonant based on Roverspraket rules
@@ -30,12 +20,6 @@ bool Model::CheckConsonant(char c) {
             (c >= 'a' && c <= 'z' && c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u')
     );
 }
-
-
-
-
-
-
 /* translateSingleConsonant()
  * Encodes a consonant based on Roverspraket rules
  * Return: A translated string according to rules
@@ -58,8 +42,6 @@ string Model::translateSingleConsonant(char c) {
         return std::string(1, c);
     }
 }
-
-
 /* translateSingleVowel()
  * Encodes a vowel based on Roverspraket rules
  * Return: A string of the encoded vowel

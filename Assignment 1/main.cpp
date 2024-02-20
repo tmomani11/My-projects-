@@ -1,10 +1,3 @@
-/*
- * Tyler Momani
- * 2455776
- * momani@chapman.edu
- * CPSC 350-01
- * Assignment 1: Robber Language Translation
- */
 #include "FileProcessor.h"
 #include <iostream>
 using namespace std;

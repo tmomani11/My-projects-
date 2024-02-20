@@ -1,11 +1,3 @@
-/*
- * Tyler Momani
- * 2455776
- * momani@chapman.edu
- * CPSC 350-01
- * Assignment 1: Robber Language Translation
- */
-
 #include "Translator.h"
 #include <string>
 #include <cctype>
@@ -33,7 +25,7 @@ string Translator::translateEnglishWord(string word){
             }
         }
         else{
-            //character not changed if not vowel or Constant
+            //character not changed if not vowel or constant
             result += i;
         }
     }
@@ -49,19 +41,16 @@ string Translator::translateEnglishWord(string word){
 string Translator::translateEnglishSentence(string sentence){
     string result;
     string word;
-    //keep adding letters until non letter is detected \n or !
-    for(char i : sentence){  // same thing as for (int i =0 ; i<sentence.length();i++)
-        if(isalpha(i)){
+    for (char i : sentence) {
+        if (isalpha(i)) {
             word.push_back(i);
-        }
-        else{
-            result += translateEnglishWord(word) + i;
+        } else {
+            result += translateEnglishWord(word);
+            result += i; // include non-alphabetic character
             word.clear();
         }
     }
-    if(isalpha(sentence[sentence.length() - 1])){
-        result += translateEnglishWord(word);
-    }
+    result += translateEnglishWord(word); // include the last word
     return result;
 }
 
