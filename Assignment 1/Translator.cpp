@@ -3,14 +3,14 @@
 #include <cctype>
 using namespace std;
 
-Translator::Translator(){}
-Translator::~Translator(){}
+Translator::Translator(){}  // default constructor
+Translator::~Translator(){}  // default destructor
 
-/* translateEnglishWord()
- * Takes an English word and translates it based of model class
- * Return: A string encoded based on requirements
- * Parameters: 
- *  string word: the word to be translated
+/*
+ * The translateEnglishWord function takes an English word and translates it based on the Model class.
+ *
+ * @param word: The word to be translated.
+ * @return: A string encoded based on Rövarspråket rules.
  */
 string Translator::translateEnglishWord(string word){
     string result;
@@ -32,11 +32,11 @@ string Translator::translateEnglishWord(string word){
     return result;
 }
 
-/* translateEnglishSentence()
- * translates a sentence or multiple based on model class
- * Return: A string containing the translated sentence
- * Parameters: 
- *  string sent: the sentence to be translated
+/*
+ * The translateEnglishSentence function translates a sentence or multiple sentences based on the Model class.
+ *
+ * @param sentence: The sentence to be translated.
+ * @return: A string containing the translated sentence.
  */
 string Translator::translateEnglishSentence(string sentence){
     string result;
@@ -53,7 +53,12 @@ string Translator::translateEnglishSentence(string sentence){
     result += translateEnglishWord(word); // include the last word
     return result;
 }
-
+/*
+ * The isVowel function checks if a character is a vowel.
+ *
+ * @param c: The character to be checked.
+ * @return: True if the character is a vowel, false otherwise.
+ */
 bool Translator::isVowel(char c) {
     // Check if the character is a vowel ,checks both lower and uppercase
     return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' ||

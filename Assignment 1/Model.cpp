@@ -6,11 +6,11 @@ using namespace std;
 Model::Model(){}
 Model::~Model(){}
 
-/* CheckConsonant()
- * Encodes a consonant based on Roverspraket rules
- * Return: true if its a consonant ,false if its not.
- * Parameters:
- *  char c: the consonant to be checked
+/*
+ * The CheckConsonant function checks if a character is a consonant.
+ *
+ * @param c: The character to be checked.
+ * @return: True if the character is a consonant, false otherwise.
  */
 bool Model::CheckConsonant(char c) {
     c = std::tolower(c);  // Convert 'c' to lowercase
@@ -20,11 +20,11 @@ bool Model::CheckConsonant(char c) {
             (c >= 'a' && c <= 'z' && c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u')
     );
 }
-/* translateSingleConsonant()
- * Encodes a consonant based on Roverspraket rules
- * Return: A translated string according to rules
- * Parameters: 
- *  char c: the consonant to be encoded
+/*
+ * The translateSingleConsonant function encodes a consonant based on Rövarspråket rules.
+ *
+ * @param c: The consonant to be encoded.
+ * @return: A translated string according to Rövarspråket rules.
  */
 string Model::translateSingleConsonant(char c) {
     if (CheckConsonant(c)) {
@@ -42,16 +42,15 @@ string Model::translateSingleConsonant(char c) {
         return std::string(1, c);
     }
 }
-/* translateSingleVowel()
- * Encodes a vowel based on Roverspraket rules
- * Return: A string of the encoded vowel
- * Parameters: 
- *  char c: the vowel to be encoded
+/*
+ * The translateSingleVowel function encodes a vowel based on Rövarspråket rules.
+ *
+ * @param c: The vowel to be encoded.
+ * @return: A string of the encoded vowel.
  */
 string Model::translateSingleVowel(char c){
     string result(1, c);
     return result;
-
 }
 
 

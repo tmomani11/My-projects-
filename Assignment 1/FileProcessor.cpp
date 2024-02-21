@@ -3,15 +3,15 @@
 #include <fstream>
 #include <iostream>
 
-FileProcessor::FileProcessor(){}
-FileProcessor::~FileProcessor(){}
+FileProcessor::FileProcessor(){}  // default constructor
+FileProcessor::~FileProcessor(){} // default destructor
 
-/* processFile()
- * takes input file,processes it according to model class and outputs to html file specified
- * Return: void
- * Parameters:
- *  string inputFile:   name of the file to read the input
- *  string outputFile:  name of the file to output to
+/*
+ * The processFile function reads from an input file, processes the content according to the Translator class,
+ * and writes the translated content to an output file in HTML format.
+ *
+ * @param inputFile: The name of the file to read the input from.
+ * @param outputFile: The name of the file to write the output to.
  */
 void FileProcessor::processFile(std::string inputFile, std::string outputFile) {
 
@@ -19,6 +19,7 @@ void FileProcessor::processFile(std::string inputFile, std::string outputFile) {
     std::fstream my_file;
     std::string translatedSentence;
     std::ofstream outFile(outputFile);
+    my_file.open(inputFile);
 
     if (!outFile.is_open()) {
         std::cerr << "Error: Unable to open output file: " << outputFile << std::endl;
@@ -27,22 +28,17 @@ void FileProcessor::processFile(std::string inputFile, std::string outputFile) {
     outFile << "<!DOCTYPE html>\n";
     outFile << " <html> <head> <title> Robbers Translation </title> </head> <body>"  << std::endl;
 
-    my_file.open(inputFile, std::ios::in);
+
     if (!my_file.is_open()) {
         std::cerr << "Error: Unable to open input file: " << inputFile << std::endl;
         return;
     }
-    while(getline(my_file,sentence))
+    while(getline(my_file,sentence) && !sentence.empty())
     {
         outFile << "<p><b>" << sentence << "</b></p>\n";
-
-        // Translate the current sentence to Rövarspråket
         std::string translated = Translator::translateEnglishSentence(sentence);
-
-        // Append the translated sentence to the overall translatedSentence
         translatedSentence += "<br>" + translated + "<br>\n";
     }
-
     outFile << "<p><i>" << translatedSentence << "</i></p>" << std::endl;
     outFile << "</body> </html>" << std::endl;
 
