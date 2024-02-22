@@ -3,8 +3,10 @@
 #include <cctype>
 using namespace std;
 
-Model::Model(){}
-Model::~Model(){}
+Model::Model() {
+}
+Model::~Model() {
+}
 
 /*
  * The CheckConsonant function checks if a character is a consonant.

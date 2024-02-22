@@ -4,7 +4,6 @@
 #include "Translator.h"
 #include <string>
 
-
 class FileProcessor{
 public:
     FileProcessor();  // Default constructor
@@ -14,10 +13,10 @@ public:
     // and writing the translated content to an output file.
     // @param inputFile The name of the file to read the input from.
     // @param outputFile The name of the file to write the output to.
-    static void processFile(std::string inputFile,std::string outputFile);
+     void processFile(std::string inputFile,std::string outputFile);
 
 private:
-
+    Translator *trans;
 };
 
 #endif

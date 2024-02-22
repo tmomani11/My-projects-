@@ -3,8 +3,12 @@
 #include <cctype>
 using namespace std;
 
-Translator::Translator(){}  // default constructor
-Translator::~Translator(){}  // default destructor
+Translator::Translator() {
+    myModel = new Model();
+}  // default constructor
+Translator::~Translator() {
+    delete myModel;
+}  // default destructor
 
 /*
  * The translateEnglishWord function takes an English word and translates it based on the Model class.
@@ -13,16 +17,15 @@ Translator::~Translator(){}  // default destructor
  * @return: A string encoded based on Rövarspråket rules.
  */
 string Translator::translateEnglishWord(string word){
-    Model m;
     string result;
-    for(char i : word){
-        char let = tolower(i);
+    for(int i = 0; i < word.length(); ++i){
+        char let = tolower(word[i]);
         if(isalpha(let)){
-            if(Translator::isVowel(let)){
-                result += m.translateSingleVowel(i);
+            if(isVowel(let)){
+                result += myModel->translateSingleVowel(word[i]);
             }
             else{
-                result += m.translateSingleConsonant(i);
+                result += myModel->translateSingleConsonant(word[i]);
             }
         }
         else{
@@ -42,12 +45,12 @@ string Translator::translateEnglishWord(string word){
 string Translator::translateEnglishSentence(string sentence){
     string result;
     string word;
-    for (char i : sentence) {
-        if (isalpha(i)) {
-            word.push_back(i);
+    for (int i = 0; i < sentence.length(); ++i){
+        if (isalpha(sentence[i])) {
+            word.push_back(sentence[i]);
         } else {
             result += translateEnglishWord(word);
-            result += i; // include non-alphabetic character
+            result += sentence[i]; // include non-alphabetic character
             word.clear();
         }
     }

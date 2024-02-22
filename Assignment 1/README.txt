@@ -2,7 +2,7 @@
 a. Tyler Momani
 b. 2455776
 c. momani@chapman.edu
-d. CPSC-350-02
+d. CPSC 350-01
 e. Assignment 1 :Robber language translation
 
 2.Source files included
@@ -21,7 +21,6 @@ e. Assignment 1 :Robber language translation
  https://www.geeksforgeeks.org/tolower-function-in-cpp/
  https://www.tutorialspoint.com/isalpha-and-isdigit-in-c-cplusplus
  https://cplusplus.com/reference/string/string/
- https://www.geeksforgeeks.org/static-keyword-cpp/
  https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
  https://stackoverflow.com/questions/116038/how-do-i-read-an-entire-file-into-a-stdstring-in-c
 

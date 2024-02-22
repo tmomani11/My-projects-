@@ -3,7 +3,7 @@
 #include "Model.h"
 #include <string>
 
-// The Translator class provides static methods for translating English words and sentences into Rövarspråket.
+// The Translator class provides  methods for translating English words and sentences into Rövarspråket.
 class Translator{
 public:
     Translator();           // Default constructor
@@ -20,6 +20,7 @@ public:
      std::string translateEnglishSentence(std::string sentence);
 
 private:
+    Model *myModel;
     // Checks if a character is a vowel.
     // @param c The character to check.
     // @return True if the character is a vowel, false otherwise.
