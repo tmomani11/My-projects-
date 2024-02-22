@@ -13,15 +13,16 @@ Translator::~Translator(){}  // default destructor
  * @return: A string encoded based on Rövarspråket rules.
  */
 string Translator::translateEnglishWord(string word){
+    Model m;
     string result;
     for(char i : word){
         char let = tolower(i);
         if(isalpha(let)){
             if(Translator::isVowel(let)){
-                result += Model::translateSingleVowel(i);
+                result += m.translateSingleVowel(i);
             }
             else{
-                result += Model::translateSingleConsonant(i);
+                result += m.translateSingleConsonant(i);
             }
         }
         else{
@@ -60,9 +61,9 @@ string Translator::translateEnglishSentence(string sentence){
  * @return: True if the character is a vowel, false otherwise.
  */
 bool Translator::isVowel(char c) {
+    tolower(c);
     // Check if the character is a vowel ,checks both lower and uppercase
-    return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' ||
-            c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
+    return (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
 }
 
 

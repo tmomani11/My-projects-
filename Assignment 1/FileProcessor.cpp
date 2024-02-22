@@ -19,6 +19,7 @@ void FileProcessor::processFile(std::string inputFile, std::string outputFile) {
     std::fstream my_file;
     std::string translatedSentence;
     std::ofstream outFile(outputFile);
+    Translator t;
     my_file.open(inputFile);
 
     if (!outFile.is_open()) {
@@ -36,7 +37,7 @@ void FileProcessor::processFile(std::string inputFile, std::string outputFile) {
     while(getline(my_file,sentence) && !sentence.empty())
     {
         outFile << "<p><b>" << sentence << "</b></p>\n";
-        std::string translated = Translator::translateEnglishSentence(sentence);
+        std::string translated = t.translateEnglishSentence(sentence);
         translatedSentence += "<br>" + translated + "<br>\n";
     }
     outFile << "<p><i>" << translatedSentence << "</i></p>" << std::endl;
