@@ -9,7 +9,6 @@ int main(int argv, char* argc[]){
     }
 
     FileProcessor *fp = new FileProcessor();
-    FileProcessor f;
     fp->processFile(argc[1],argc[2]);
 
     delete fp;
