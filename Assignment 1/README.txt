@@ -13,9 +13,7 @@ e. Assignment 1 :Robber language translation
  FileProcessor.cpp
  Translator.h
  Translator.cpp
- 
- 
-3. 
+
 
 4. References 
  https://www.geeksforgeeks.org/tolower-function-in-cpp/
@@ -27,4 +25,4 @@ e. Assignment 1 :Robber language translation
 
 5. compiling
 g++ *.cpp -o Rover
-./Rover inputfile.txt outputfile.html
+./Rover inputfile.txt output.html
