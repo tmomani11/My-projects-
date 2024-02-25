@@ -64,7 +64,7 @@ string Translator::translateEnglishSentence(string sentence){
  * @return: True if the character is a vowel, false otherwise.
  */
 bool Translator::isVowel(char c) {
-    tolower(c);
+    c = tolower(c);
     // Check if the character is a vowel ,checks both lower and uppercase
     return (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
 }
