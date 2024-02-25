@@ -29,9 +29,9 @@ void FileProcessor::processFile(std::string inputFile, std::string outputFile) {
         std::cerr << "Error: Unable to open output file: " << outputFile << std::endl;
         return;
     }
-    outFile << "<!DOCTYPE html>\n";
-    outFile << " <html> <head> <title> Robbers Translation </title> </head> <body>"  << std::endl;
 
+    outFile << "<!DOCTYPE html>\n";
+    outFile << " <html> <head> <title> English to Robber Translation </title> </head> <body>" ;
 
     if (!my_file.is_open()) {
         std::cerr << "Error: Unable to open input file: " << inputFile << std::endl;
@@ -39,10 +39,11 @@ void FileProcessor::processFile(std::string inputFile, std::string outputFile) {
     }
     while(getline(my_file,sentence) && !sentence.empty())
     {
-        outFile << "<p><b>" << sentence << "</b></p>\n";
+        outFile << "<p><b>" << sentence << "</b></p>";
         std::string translated = trans->translateEnglishSentence(sentence);
-        translatedSentence += "<br>" + translated + "<br>\n";
+        translatedSentence += "<br><br>" +  translated ;
     }
+
     outFile << "<p><i>" << translatedSentence << "</i></p>" << std::endl;
     outFile << "</body> </html>" << std::endl;
 
