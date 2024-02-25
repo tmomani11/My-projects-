@@ -18,10 +18,6 @@ class Model{
       std::string translateSingleVowel(char c);
 
 private:
-    // Checks if a character is a consonant.
-    // @param c The character to check.
-    // @return True if the character is a consonant, false otherwise.
-      bool CheckConsonant(char c);
 
 };
 #endif
