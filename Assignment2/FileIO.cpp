@@ -1,10 +1,3 @@
-/*
- * Tyler Momani
- * 2455776
- * momani@chapman.edu
- * CPSC 350-02
- * Assignment 2: Not So Super Mario Bros.
- */
 #include "FileIO.h"
 #include <string>
 #include <iostream>
@@ -106,9 +99,9 @@ void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, string action, int
                         int numCoins, int* nextDir, bool isStaying, char** level, int gridDim){
     m_log.open(m_outputFileName, ios::app);
 
-    m_log << "Level Number " << lvlNum + 1 << ", ";
-    m_log << "Mario at row " << pos[1] + 1 << ", column " << pos[0] + 1 << ", ";
-    m_log << "Power level " << powerLevel << ", ";
+    m_log << "Level Number " << lvlNum + 1 << ", \n";
+    m_log << "Mario at row " << pos[1] + 1 << ", column " << pos[0] + 1 << ", \n";
+    m_log << "Power level " << powerLevel << ", \n";
     m_log << action << ", "
           << numLives << ((numLives == 1) ? " life" : " lives") << " left, "
           << numCoins << ((numCoins == 1) ? " coin" : " coins");
@@ -119,7 +112,7 @@ void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, string action, int
         string dir = isStaying ? "STAY PUT" : ((nextDir[0] == 0) ?
                                                     ((nextDir[1] == 1) ? "DOWN" : "UP") :
                                                     ((nextDir[1] == 1) ? "RIGHT" : "LEFT"));
-        m_log << ", Mario's next move: " << dir << ".";
+        m_log << ", Mario's next move: " << dir << ".\n";
 
     }
     m_log << '\n';

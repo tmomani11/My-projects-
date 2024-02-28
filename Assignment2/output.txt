@@ -1,0 +1,101 @@
+Level Number 1
+w H b 
+m c m 
+m x m 
+
+Level Number 1, 
+Mario at row 2, column 3, 
+Power level 0, 
+The position is empty, 3 lives left, 0 coins, Mario's next move: RIGHT.
+
+w x b 
+m c m 
+m H m 
+
+Level Number 1, 
+Mario at row 3, column 3, 
+Power level 0, 
+Mario ate a mushroom, 3 lives left, 0 coins, Mario's next move: UP.
+
+w x b 
+m c m 
+m x H 
+
+Level Number 1, 
+Mario at row 3, column 2, 
+Power level 1, 
+Mario ate a mushroom, 3 lives left, 0 coins, Mario's next move: UP.
+
+w x b 
+m c H 
+m x x 
+
+Level Number 1, 
+Mario at row 3, column 2, 
+Power level 2, 
+Mario fought the level boss and lost, 3 lives left, 0 coins, Mario's next move: STAY PUT.
+
+w x b 
+m c H 
+m x x 
+
+Level Number 1, 
+Mario at row 3, column 1, 
+Power level 0, 
+Mario fought the level boss and won, 3 lives left, 0 coins, Mario's next move: UP.
+
+w x H 
+m c x 
+m x x 
+
+Level Number 2
+m b m 
+k m H 
+m m m 
+
+Level Number 2, 
+Mario at row 3, column 1, 
+Power level 0, 
+Mario ate a mushroom, 3 lives left, 0 coins, Mario's next move: DOWN.
+
+m b H 
+k m x 
+m m m 
+
+Level Number 2, 
+Mario at row 3, column 2, 
+Power level 1, 
+The position is empty, 3 lives left, 0 coins, Mario's next move: LEFT.
+
+m b x 
+k m H 
+m m m 
+
+Level Number 2, 
+Mario at row 2, column 2, 
+Power level 1, 
+Mario ate a mushroom, 3 lives left, 0 coins, Mario's next move: UP.
+
+m b x 
+k H x 
+m m m 
+
+Level Number 2, 
+Mario at row 2, column 2, 
+Power level 2, 
+Mario fought the level boss and lost, 3 lives left, 0 coins, Mario's next move: STAY PUT.
+
+m b x 
+k H x 
+m m m 
+
+Level Number 2, 
+Mario at row 2, column 1, 
+Power level 0, 
+Mario fought the level boss and won, 3 lives left, 0 coins, Mario's next move: UP.
+
+m H x 
+k x x 
+m m m 
+
+Mario Won! :). 10 steps taken.

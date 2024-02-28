@@ -1,10 +1,3 @@
-/*
- * Tyler Momani
- * 2455776
- * momani@chapman.edu
- * CPSC 350-02
- * Assignment 2: Not So Super Mario Bros.
- */
 #ifndef MARIO_H
 #define MARIO_H
 #include <string>
