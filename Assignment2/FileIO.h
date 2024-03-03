@@ -14,7 +14,7 @@ class FileIO{
         FileIO(char* outputFileName);
         virtual ~FileIO();
 
-        static bool readFile(char* fileName, int* specs, int numSpecs);
+        bool readFile(char* fileName, int* specs, int numSpecs);
         void displayLevel(char** level, int lvlNum, int gridDim);
         void writeToLog(int lvlNum, int* pos, int powerLevel, std::string action, int numLives,
                         int numCoins, int* nextDir, bool isStaying, char** level, int gridDim);
