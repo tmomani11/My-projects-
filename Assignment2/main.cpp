@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
     }
 
     int specs[NUM_OF_SPECS];
-    if(!file.readFile(argv[1], specs, NUM_OF_SPECS)){
+    if(!file.readFile(argv[1], specs)){
         cout << "Unable to read specs file.\n";
         return -1;
     }

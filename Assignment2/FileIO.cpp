@@ -43,19 +43,19 @@ FileIO::~FileIO(){
  *   int* specsHolder: The memory address of the array to populate with the int specs
  *   int numOfSpecs: The number of specifications in the file
  */
-bool FileIO::readFile(char* fileName, int* specsHolder, int numOfSpecs){
+bool FileIO::readFile(char* fileName, int* specsHolder){
     bool success = true;
     ifstream fileIn;
+    string m_line = "";
+    int i = 0;
     fileIn.open(fileName, ios::in);
 
     if(!(fileIn.is_open())){
         success = false;
     }
     else{
-        for(int i = 0; i < numOfSpecs; ++i){
-            string buffer;
-            getline(fileIn, buffer);
-            specsHolder[i] = stoi(buffer);
+        while(getline(fileIn, m_line)){
+            specsHolder[i++] = stoi(m_line);
         }
         fileIn.close();
     }
@@ -95,16 +95,17 @@ void FileIO::displayLevel(char** level, int lvlNum, int gridDim){
  *   int* pos: Mario's position
  *   int powerLevel: Mario's power level
  */
-void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, string action, int numLives,
-                        int numCoins, int* nextDir, bool isStaying, char** level, int gridDim){
+void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, const string& action, int numLives,
+                        int numCoins, const int* nextDir, bool isStaying, char** level, int gridDim){
     m_log.open(m_outputFileName, ios::app);
-
+    m_log << "=======================================\n";
     m_log << "Level Number " << lvlNum + 1 << ", \n";
-    m_log << "Mario at row " << pos[1] + 1 << ", column " << pos[0] + 1 << ", \n";
-    m_log << "Power level " << powerLevel << ", \n";
+    m_log << "Mario is at (" << pos[1] + 1 << "," << pos[0] + 1 << ") \n";
+    m_log << "Power level " << powerLevel << " \n";
     m_log << action << ", "
           << numLives << ((numLives == 1) ? " life" : " lives") << " left, "
           << numCoins << ((numCoins == 1) ? " coin" : " coins");
+    m_log << endl;
 
 
 
@@ -112,10 +113,10 @@ void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, string action, int
         string dir = isStaying ? "STAY PUT" : ((nextDir[0] == 0) ?
                                                     ((nextDir[1] == 1) ? "DOWN" : "UP") :
                                                     ((nextDir[1] == 1) ? "RIGHT" : "LEFT"));
-        m_log << ", Mario's next move: " << dir << ".\n";
+        m_log << "Mario's next move: " << dir << ".\n";
 
     }
-    m_log << '\n';
+    m_log << "=======================================\n";
 
     for(int i = 0; i < gridDim; ++i){
         for (int j = 0; j < gridDim; ++j){
