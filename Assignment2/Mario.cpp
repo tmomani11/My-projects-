@@ -321,7 +321,7 @@ void Mario::decreasePL(int scale){
  * Return: 
  *   int: m_lives
  */
-int Mario::getLives(){
+int Mario::getLives() const{
     return m_lives;
 }
 
@@ -330,7 +330,7 @@ int Mario::getLives(){
  * Return: 
  *   int: m_coins
  */
-int Mario::getCoins(){
+int Mario::getCoins() const{
     return m_coins;
 }
 
@@ -339,7 +339,7 @@ int Mario::getCoins(){
  * Return: 
  *   int: m_powerLevel
  */
-int Mario::getPowerLevel(){
+int Mario::getPowerLevel() const{
     return m_powerLevel;
 }
 
@@ -348,7 +348,7 @@ int Mario::getPowerLevel(){
  * Return: 
  *   int: m_totalSteps
  */
-int Mario::getTotalSteps(){
+int Mario::getTotalSteps() const{
     return m_totalSteps;
 }
 
@@ -357,7 +357,7 @@ int Mario::getTotalSteps(){
  * Return: 
  *   bool: m_alive
  */
-bool Mario::isAlive(){
+bool Mario::isAlive() const{
     return m_alive;
 }
 
@@ -390,7 +390,7 @@ int* Mario::getNextMove(){
  * Parameters: 
  *   n/a
  */
-bool Mario::isStaying(){
+bool Mario::isStaying() const{
     return m_stayPut;
 }
 

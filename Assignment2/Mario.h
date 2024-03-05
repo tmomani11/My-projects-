@@ -38,14 +38,14 @@ class Mario{
         bool move(char** level, int gridDim);
 
         //Accessors
-        int getLives();
-        int getCoins();
-        int getPowerLevel();
-        int getTotalSteps();
-        bool isAlive();
+        int getLives() const;
+        int getCoins() const;
+        int getPowerLevel() const;
+        int getTotalSteps() const;
+        bool isAlive() const;
         int* getPosAtLevel(int levelNum);
         int* getNextMove();
-        bool isStaying();
+        bool isStaying() const;
         std::string getAction();
 
         //Mutators
