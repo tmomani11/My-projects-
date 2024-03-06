@@ -12,7 +12,7 @@
  *   n/a
  */
 Mario::Mario(){
-    srand(time(0));
+    srand(time(nullptr));
 
     m_lives = 0;
     m_coins = 0;
@@ -80,6 +80,7 @@ Mario::~Mario(){
 
 //Public Methods
 
+
 /* move()
  * Handles what Mario will do when moving once in a level (with many helper functions)
  * Return:
@@ -103,8 +104,8 @@ bool Mario::move(char** level, int gridDim){
         newY = m_pos[m_currentLevel][0];
         newX = (m_pos[m_currentLevel][1] + negOrPos + gridDim) % gridDim;
     }
-
-    switch(handleInteraction(level[newY][newX])){
+    int interaction = handleInteraction(level[newY][newX]);
+    switch(interaction){
         case 0: //Boss defeated or warp pipe hit
             levelComplete = true;
             /* FALLTHROUGH */
@@ -135,8 +136,8 @@ bool Mario::move(char** level, int gridDim){
  */
 void Mario::generateNextMove(){
     if(!m_stayPut){
-        m_nextMove[0] = rand() % 2; 
-        m_nextMove[1] = (rand() % 2) ? 1 : -1; 
+        m_nextMove[0] = rand() % 2; // move on either the x or y axis
+        m_nextMove[1] = (rand() % 2)? 1 : -1; // move in the positive(right) or negative(left) direction
     }
 }
 
