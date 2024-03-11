@@ -74,7 +74,9 @@ bool FileIO::readFile(char* fileName, int* specsHolder){
 void FileIO::displayLevel(char** level, int lvlNum, int gridDim){
     m_log.open(m_outputFileName, ios::app);
 
-    m_log << "Level Number " << lvlNum + 1 << '\n';
+    m_log << "*=======================================*\n";
+    m_log << "*              Level Number " << lvlNum + 1 << "         *" <<'\n';
+    m_log << "*=======================================*\n";
 
     for(int i = 0; i < gridDim; ++i){
         for (int j = 0; j < gridDim; ++j){
