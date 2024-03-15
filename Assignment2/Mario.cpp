@@ -151,53 +151,7 @@ void Mario::generateNextMove(){
  * Parameters: 
  *   char object: The thing Mario is interacting with
  */
-//int Mario::handleInteraction(char object) {
-//    int result = -1;
-//
-//    switch (object) {
-//        case 'x':
-//            action = "The position is empty";
-//            result = 1;
-//            break;
-//
-//        case 'c':
-//            collectCoin();
-//            action = "Mario collected a coin";
-//            result = 1;
-//            break;
-//
-//        case 'm':
-//            collectMushroom();
-//            action = "Mario ate a mushroom";
-//            result = 1;
-//            break;
-//
-//        case 'g':
-//        case 'k':
-//        case 'b':
-//            action = "Mario fought ";
-//            if (object == 'g') action += "a Goomba ";
-//            else if (object == 'k') action += "a Koopa ";
-//            else action += "the level boss ";
-//
-//            result = handleNPC(object) ? (object == 'b' ? 0 : 1) : -1;
-//
-//            action += "and ";
-//            action += result == 0 ? "won" : "lost";
-//            break;
-//
-//        case 'w':
-//            action = "Mario warped";
-//            result = 0;
-//            break;
-//
-//        default:
-//            action = "?";
-//            break;
-//    }
-//
-//    return result;
-//}
+
 int Mario::handleInteraction(char object) {
     int result = -1;
 

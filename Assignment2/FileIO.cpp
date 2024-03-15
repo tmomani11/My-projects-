@@ -1,7 +1,6 @@
 #include "FileIO.h"
 #include <string>
 #include <iostream>
-using namespace std;
 
 //Constructors & Destructor
 
@@ -19,7 +18,7 @@ FileIO::FileIO(){
  */
 FileIO::FileIO(char* outputFile){
     this->outputFile = outputFile;
-    log.open(outputFile, ios::trunc);
+    log.open(outputFile, std::ios::trunc);
     log.close();
 
 }
@@ -44,10 +43,10 @@ FileIO::~FileIO(){
  *   int numOfSpecs: The number of specifications in the file
  */
 bool FileIO::readFile(char* fileName, int* specsHolder){
-    ifstream fileIn;
-    string line = "";
+    std::ifstream fileIn;
+    std::string line = "";
     int i = 0;
-    fileIn.open(fileName, ios::in);
+    fileIn.open(fileName, std::ios::in);
 
     if(!(fileIn.is_open())){
         throw std::runtime_error("Failed to open file");
@@ -71,9 +70,9 @@ bool FileIO::readFile(char* fileName, int* specsHolder){
  *   int gridDim: The dimensions of the level
  */
 void FileIO::displayLevel(char** level, int lvlNum, int gridDim){
-    log.open(outputFile, ios::app);
+    log.open(outputFile, std::ios::app);
     log << "*=======================================*\n";
-    log << "*              Level Number " << lvlNum  << "         *" <<'\n';
+    log << "*              Level Number " << lvlNum  << "           *" <<'\n';
     log << "*=======================================*\n";
 
     for(int i = 0; i < gridDim; ++i){
@@ -94,25 +93,34 @@ void FileIO::displayLevel(char** level, int lvlNum, int gridDim){
  *   int* pos: Mario's position
  *   int powerLevel: Mario's power level
  */
-void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, const string& action, int numLives,
+void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, const std::string& action, int numLives,
                         int numCoins, const int* nextDir, bool isStaying, char** level, int gridDim){
-    log.open(outputFile, ios::app);
+    log.open(outputFile, std::ios::app);
     log << "=======================================\n";
     log << "Level Number " << lvlNum  << ", \n";
     log << "Mario is at (" << pos[1] + 1 << "," << pos[0] + 1 << ") \n";
     log << "Power level " << powerLevel << " \n";
-    log << action << ", "
-          << numLives << ((numLives == 1) ? " life" : " lives") << " left, "
-          << numCoins << ((numCoins == 1) ? " coin" : " coins");
-    log << endl;
+    log << action << " ";
+    if (numLives == 1) {
+        log  << std::endl << numLives << " life";
+    } else {
+        log << std::endl << numLives << " lives";
+    }
+    log << " left ";
+    if (numCoins == 1) {
+        log << std::endl << numCoins << " coin";
+    } else {
+        log << std::endl << numCoins << " coins";
+    }
+    log << std::endl;
 
 
 
     if(numLives > 0){
-        string dir = isStaying ? "STAY PUT" : ((nextDir[0] == 0) ?
+        std::string dir = isStaying ? "STAY PUT" : ((nextDir[0] == 0) ?
                                                     ((nextDir[1] == 1) ? "DOWN" : "UP") :
                                                     ((nextDir[1] == 1) ? "RIGHT" : "LEFT"));
-        log << "Mario's next move: " << dir << ".\n";
+        log << "Mario's next move: " << dir << "\n";
 
     }
     log << "=======================================\n";
@@ -135,15 +143,15 @@ void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, const string& acti
  *   char state: If the game was won or lost
  *   int moves: The number of moves taken by Mario during the simulation
  */
-void FileIO::writeLogEnd(string state, int moves){
-    log.open(outputFile, ios::app);
+void FileIO::writeLogEnd(std::string state, int moves){
+    log.open(outputFile, std::ios::app);
     if(state == "lost"){
-        log << "Mario lost :( . ";
+        log << "Mario lost better luck next time . ";
     } else if(state == "win"){
         log << "Mario Won! :). ";
     } else {
         log << "Don't know what happened";
     }
-    log << moves << " steps" << " taken." << endl;
+    log << moves << " steps" << " taken." << std::endl;
     log.close();
 }

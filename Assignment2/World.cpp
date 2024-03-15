@@ -16,7 +16,7 @@
 World::World(){
     srand(time(0));
 
-    player          = nullptr;
+    mario= nullptr;
     worldLog        = nullptr;
     numLevels       = 0;
     gridDim         = 0;
@@ -49,12 +49,12 @@ World::World(int* specs, char* outputFileName){
     mushroomChance = specs[7];
     this->outputFileName = outputFileName;
 
-    player = new Mario(marioLives, numLevels);
+    mario= new Mario(marioLives, numLevels);
     worldLog = new FileIO(outputFileName);
 }
 
 /* World()
- * Destructor: deallocated the world & player
+ * Destructor: deallocated the world & mario
  */
 World::~World(){
     if(world != nullptr){
@@ -66,7 +66,7 @@ World::~World(){
         }
         delete[] world;
     }
-        delete player;
+        delete mario;
 
 }
 
@@ -74,13 +74,12 @@ World::~World(){
 
 /* generateWorld()
  * Creates every level of the world
-
  */
 bool World::generateWorld(){
     bool success = true;
 
     if(gridDim < 2){
-        std::cout << "The grid is too small to populate!" << std::endl;
+        std::cout << "The grid is too small " << std::endl;
         success = false;
     }
     else{
@@ -113,8 +112,7 @@ bool World::generateWorld(){
                 }
                 world[i][coords[0]][coords[1]] = items[l];
 
-                if(items[l] == 'H'){
-                    player->setPos(i, coords[0], coords[1]);
+                if(items[l] == 'H'){mario->setPos(i, coords[0], coords[1]);
                 }
             }
         }
@@ -160,16 +158,14 @@ char World::generateSquare(){
  *   int levelNum: The level to play
  */
 bool World::playLevel(int levelNum) {
-    bool levelComplete = false;
-    player->setLevel(levelNum);
+    bool levelComplete = false;mario->setLevel(levelNum);
 
-    while (player->isAlive() && !levelComplete) {
-        int powerLevelBeforeMove = player->getPowerLevel();
-        levelComplete = player->move(world[levelNum], gridDim);
+    while (mario->isAlive() && !levelComplete) {
+        int powerLevelBeforeMove =mario->getPowerLevel();
+        levelComplete =mario->move(world[levelNum], gridDim);
 
-        worldLog->writeToLog(levelNum,player->getPosAtLevel(levelNum),powerLevelBeforeMove,
-                             player->getAction(),player->getLives(),player->getCoins(),
-                               player->getNextMove(),player->isStaying(),world[levelNum],
+        worldLog->writeToLog(levelNum,mario->getPosAtLevel(levelNum),powerLevelBeforeMove,mario->getAction(),mario->getLives(),mario->getCoins(),
+                             mario->getNextMove(),mario->isStaying(),world[levelNum],
                                 gridDim);
     }
     return levelComplete;
@@ -192,17 +188,16 @@ bool World::start(){
         std::cout << "\n\nWORLD GENERATION SUCCESS \n   ";
         for(int i = 0; i < numLevels; ++i){
             worldLog->displayLevel(world[i], i, gridDim);
-            if(!playLevel(i) && !(player->isAlive())){
-                worldLog->writeLogEnd("lost", player->getTotalSteps());
+            if(!playLevel(i) && !mario->isAlive()){
+                worldLog->writeLogEnd("lost", mario->getTotalSteps());
                 break;
             }
         }
-        if(player->isAlive()){
-            worldLog->writeLogEnd("win", player->getTotalSteps());
+        if(mario->isAlive()){
+            worldLog->writeLogEnd("win", mario->getTotalSteps());
         }
         std::cout << "\n\nTerminating! " << std::endl;
     }
-
     return success;
 }
 
