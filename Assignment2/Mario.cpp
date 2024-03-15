@@ -14,19 +14,19 @@
 Mario::Mario(){
     srand(time(nullptr));
 
-    m_lives = 0;
-    m_coins = 0;
-    m_powerLevel = 0;
-    m_enemiesDefeatedCounter = 0;
-    m_totalSteps = 0;
-    m_currentLevel = 0;
-    m_totalLevels = 0;
-    m_alive = false;
-    m_pos = nullptr;
-    m_nextMove[0] = 0;
-    m_nextMove[1] = 0;
-    m_stayPut = false;
-    m_action = "";
+    lives = 0;
+    coins = 0;
+    powerLevel = 0;
+    enemiesDefeatedCounter = 0;
+    totalSteps = 0;
+    currentLevel = 0;
+    numLevels = 0;
+    alive = false;
+    pos = nullptr;
+    nextMove[0] = 0;
+    nextMove[1] = 0;
+    stayPut = false;
+    action = "";
 }
 
 /* Mario()
@@ -40,22 +40,22 @@ Mario::Mario(){
 Mario::Mario(int lives, int numLevels){
     srand(time(0));
     
-    m_lives = lives;
-    m_coins = 0;
-    m_powerLevel = 0;
-    m_enemiesDefeatedCounter = 0;
-    m_totalSteps = 0;
-    m_currentLevel = 0;
-    m_totalLevels = numLevels;
-    m_alive = true;
-    m_stayPut = false;
-    m_action = "";
+    this->lives = lives;
+    coins = 0;
+    powerLevel = 0;
+    enemiesDefeatedCounter = 0;
+    totalSteps = 0;
+    currentLevel = 0;
+    this->numLevels = numLevels;
+    alive = true;
+    stayPut = false;
+    action = "";
 
-    m_pos = new int*[m_totalLevels];
-    for(int i = 0; i < m_totalLevels; ++i){
-        m_pos[i] = new int[2];
+    pos = new int*[numLevels];
+    for(int i = 0; i < numLevels; ++i){
+        pos[i] = new int[2];
         for(int j = 0; j < 2; ++j){
-            m_pos[i][j] = 0;
+            pos[i][j] = 0;
         }
     }
 
@@ -63,18 +63,18 @@ Mario::Mario(int lives, int numLevels){
 }
 
 /* Mario()
- * Destructor: deallocates m_pos
+ * Destructor: deallocates pos
  * Return: 
  *   n/a
  * Parameters: 
  *   n/a
  */
 Mario::~Mario(){
-    if(m_pos != nullptr){
-        for(int i = 0; i < m_totalLevels; ++i){
-            delete[] m_pos[i];
+    if(pos != nullptr){
+        for(int i = 0; i < numLevels; ++i){
+            delete[] pos[i];
         }
-        delete[] m_pos;
+        delete[] pos;
     }
 }
 
@@ -92,17 +92,17 @@ Mario::~Mario(){
 bool Mario::move(char** level, int gridDim){
     int newY, newX;
     bool levelComplete = false;
-    int axis = m_nextMove[0];
-    int negOrPos = m_nextMove[1];
+    int axis = nextMove[0];
+    int negOrPos = nextMove[1];
 
     if (axis == 0) {
         // Moving on Y axis
-        newY = (m_pos[m_currentLevel][0] + negOrPos + gridDim) % gridDim;
-        newX = m_pos[m_currentLevel][1];
+        newY = (pos[currentLevel][0] + negOrPos + gridDim) % gridDim;
+        newX = pos[currentLevel][1];
     } else if (axis == 1) {
         // Moving on X axis
-        newY = m_pos[m_currentLevel][0];
-        newX = (m_pos[m_currentLevel][1] + negOrPos + gridDim) % gridDim;
+        newY = pos[currentLevel][0];
+        newX = (pos[currentLevel][1] + negOrPos + gridDim) % gridDim;
     }
     int interaction = handleInteraction(level[newY][newX]);
     switch(interaction){
@@ -111,16 +111,16 @@ bool Mario::move(char** level, int gridDim){
             /* FALLTHROUGH */
 
         case 1: //Won the fight against an enemy, picked up an item, or landed on empty ground
-            level[m_pos[m_currentLevel][0]][m_pos[m_currentLevel][1]] = 'x';
-            setPos(m_currentLevel, newY, newX);
-            level[m_pos[m_currentLevel][0]][m_pos[m_currentLevel][1]] = 'H';
+            level[pos[currentLevel][0]][pos[currentLevel][1]] = 'x';
+            setPos(currentLevel, newY, newX);
+            level[pos[currentLevel][0]][pos[currentLevel][1]] = 'H';
             break;
 
         default:
             break;
     }
 
-    m_totalSteps++;
+    totalSteps++;
     generateNextMove();
 
     return levelComplete;
@@ -135,9 +135,9 @@ bool Mario::move(char** level, int gridDim){
  * Mario will keep the same direction if he must stay put
  */
 void Mario::generateNextMove(){
-    if(!m_stayPut){
-        m_nextMove[0] = rand() % 2; // move on either the x or y axis
-        m_nextMove[1] = (rand() % 2)? 1 : -1; // move in the positive(right) or negative(left) direction
+    if(!stayPut){
+        nextMove[0] = rand() % 2; // move on either the x or y axis
+        nextMove[1] = (rand() % 2)? 1 : -1; // move in the positive(right) or negative(left) direction
     }
 }
 
@@ -151,49 +151,77 @@ void Mario::generateNextMove(){
  * Parameters: 
  *   char object: The thing Mario is interacting with
  */
+//int Mario::handleInteraction(char object) {
+//    int result = -1;
+//
+//    switch (object) {
+//        case 'x':
+//            action = "The position is empty";
+//            result = 1;
+//            break;
+//
+//        case 'c':
+//            collectCoin();
+//            action = "Mario collected a coin";
+//            result = 1;
+//            break;
+//
+//        case 'm':
+//            collectMushroom();
+//            action = "Mario ate a mushroom";
+//            result = 1;
+//            break;
+//
+//        case 'g':
+//        case 'k':
+//        case 'b':
+//            action = "Mario fought ";
+//            if (object == 'g') action += "a Goomba ";
+//            else if (object == 'k') action += "a Koopa ";
+//            else action += "the level boss ";
+//
+//            result = handleNPC(object) ? (object == 'b' ? 0 : 1) : -1;
+//
+//            action += "and ";
+//            action += result == 0 ? "won" : "lost";
+//            break;
+//
+//        case 'w':
+//            action = "Mario warped";
+//            result = 0;
+//            break;
+//
+//        default:
+//            action = "?";
+//            break;
+//    }
+//
+//    return result;
+//}
 int Mario::handleInteraction(char object) {
     int result = -1;
 
-    switch (object) {
-        case 'x':
-            m_action = "The position is empty";
-            result = 1;
-            break;
-
-        case 'c':
-            collectCoin();
-            m_action = "Mario collected a coin";
-            result = 1;
-            break;
-
-        case 'm':
-            collectMushroom();
-            m_action = "Mario ate a mushroom";
-            result = 1;
-            break;
-
-        case 'g':
-        case 'k':
-        case 'b':
-            m_action = "Mario fought ";
-            if (object == 'g') m_action += "a Goomba ";
-            else if (object == 'k') m_action += "a Koopa ";
-            else m_action += "the level boss ";
-
-            result = handleNPC(object) ? (object == 'b' ? 0 : 1) : -1;
-
-            m_action += "and ";
-            m_action += result == 0 ? "won" : "lost";
-            break;
-
-        case 'w':
-            m_action = "Mario warped";
-            result = 0;
-            break;
-
-        default:
-            m_action = "?";
-            break;
+    if (object == 'x') {
+        action = "The position is empty";
+        result = 1;
+    } else if (object == 'c') {
+        collectCoin();
+        action = "Mario collected a coin";
+        result = 1;
+    } else if (object == 'm') {
+        collectMushroom();
+        action = "Mario ate a mushroom";
+        result = 1;
+    } else if (object == 'g' || object == 'k' || object == 'b') {
+        action = "Mario fought ";
+        action += (object == 'g') ? "a Goomba " : (object == 'k') ? "a Koopa " : "the level boss ";
+        result = handleNPC(object) ? (object == 'b' ? 0 : 1) : -1;
+        action += result == 0 ? "won" : "lost";
+    } else if (object == 'w') {
+        action = "Mario warped";
+        result = 0;
+    } else {
+        action = "?";
     }
 
     return result;
@@ -202,10 +230,10 @@ int Mario::handleInteraction(char object) {
  * Collects a coin & adds a life if it reaches 10
  */
 void Mario::collectCoin(){
-    m_coins++;
-    if(m_coins == 10){
-        m_lives++;
-        m_coins = 0;
+    coins++;
+    if(coins == 10){
+        lives++;
+        coins = 0;
     }
 }
 
@@ -213,13 +241,13 @@ void Mario::collectCoin(){
  * Collects a mushroom and raises Mario's power level (capped at 0-2)
  */
 void Mario::collectMushroom(){
-    if(m_powerLevel < 2){
-        m_powerLevel++;
+    if(powerLevel < 2){
+        powerLevel++;
     }
 }
 
 /* handleNPC()
- * Handles Mario's interaction with an NPC (currently only supports enemies)
+ * Handles Mario's interaction with an NPC
  * Return: 
  *   bool: Returns if Mario is able to move on or must stay in position
  * Parameters: 
@@ -228,53 +256,47 @@ void Mario::collectMushroom(){
 bool Mario::handleNPC(char npc) {
     bool moveOn = false;
 
+    int winPercent = 0;
+    int drain = 0;
+
     switch (npc) {
         case 'g':
-            moveOn = fightEnemy(80, 1);
+            winPercent = 80;
+            drain = 1;
             break;
 
         case 'k':
-            moveOn = fightEnemy(65, 1);
+            winPercent = 65;
+            drain = 1;
             break;
 
         case 'b':
-            // Special case: Even if Mario loses his fight with the boss without losing a life (i.e., at PL2, dropped to PL0), he must stay and fight
-            if (!(moveOn = fightEnemy(50, 2))) {
-                m_stayPut = true;
-            }
+            winPercent = 50;
+            drain = 2;
             break;
 
         default:
             break;
     }
 
-    if (moveOn) {  // If Mario won his fight, he can move on
-        m_stayPut = false;
+    if (winPercent > 0 && drain > 0) {
+        int losePercent = rand() % 100 + 1;
+        if (losePercent <= winPercent) {
+            moveOn = true;
+            enemyDefeated();
+        } else {
+            decreasePL(drain);
+            if (npc == 'b') {
+                stayPut = true;
+            }
+        }
+    }
+
+    if (moveOn) {
+        stayPut = false;
     }
 
     return moveOn;
-}
-
-
-/* fightEnemy()
- * Handles Mario's fights with enemies
- * Return: 
- *   bool: Returns if Mario won or lost
- * Parameters: 
- *   int winPercent: The percent chance that Mario will win the fight against a certain enemy
- *   int drain: How many power levels will be drained from Mario if he loses
- */
-bool Mario::fightEnemy(int winPercent, int drain){
-    int losePercent = rand() % 100 + 1;
-    bool win = false;
-    if(losePercent <= winPercent){
-        win = true;
-        enemyDefeated();
-    }
-    else{
-        decreasePL(drain);
-    }
-    return win;
 }
 
 /* enemyDefeated()
@@ -286,10 +308,10 @@ bool Mario::fightEnemy(int winPercent, int drain){
  *   void
  */
 void Mario::enemyDefeated(){
-    m_enemiesDefeatedCounter++;
-    if(m_enemiesDefeatedCounter == 7){
-        m_lives++;
-        m_enemiesDefeatedCounter = 0;
+    enemiesDefeatedCounter++;
+    if(enemiesDefeatedCounter == 7){
+        lives++;
+        enemiesDefeatedCounter = 0;
     }
 }
 
@@ -303,14 +325,14 @@ void Mario::enemyDefeated(){
  *   int scale: How much to decrease his power level by
  */
 void Mario::decreasePL(int scale){
-    m_powerLevel -= scale;
-    if(m_powerLevel < 0){
-        m_powerLevel = 0;
-        m_enemiesDefeatedCounter = 0;
-        m_lives--;
-        m_stayPut = true;
-        if(m_lives <= 0){
-            m_alive = false;
+    powerLevel -= scale;
+    if(powerLevel < 0){
+        powerLevel = 0;
+        enemiesDefeatedCounter = 0;
+        lives--;
+        stayPut = true;
+        if(lives <= 0){
+            alive = false;
         }
     }
 }
@@ -318,96 +340,96 @@ void Mario::decreasePL(int scale){
 //Accessors & Mutators
 
 /* getLives()
- * Accessor for Mario's m_lives attribute
+ * Accessor for Mario's lives attribute
  * Return: 
- *   int: m_lives
+ *   int: lives
  */
 int Mario::getLives() const{
-    return m_lives;
+    return lives;
 }
 
 /* getCoins()
- * Accessor for Mario's m_coins attribute
+ * Accessor for Mario's coins attribute
  * Return: 
- *   int: m_coins
+ *   int: coins
  */
 int Mario::getCoins() const{
-    return m_coins;
+    return coins;
 }
 
 /* getPowerLevel()
- * Accessor for Mario's m_powerLevel attribute
+ * Accessor for Mario's powerLevel attribute
  * Return: 
- *   int: m_powerLevel
+ *   int: powerLevel
  */
 int Mario::getPowerLevel() const{
-    return m_powerLevel;
+    return powerLevel;
 }
 
 /* getTotalSteps()
- * Accessor for Mario's m_totalSteps attribute
+ * Accessor for Mario's totalSteps attribute
  * Return: 
- *   int: m_totalSteps
+ *   int: totalSteps
  */
 int Mario::getTotalSteps() const{
-    return m_totalSteps;
+    return totalSteps;
 }
 
 /* isAlive()
- * Accessor for Mario's m_alive attribute
+ * Accessor for Mario's alive attribute
  * Return: 
- *   bool: m_alive
+ *   bool: alive
  */
 bool Mario::isAlive() const{
-    return m_alive;
+    return alive;
 }
 
 /* getPosAtLevel()
- * Accessor for Mario's m_pos attribute at a given level
+ * Accessor for Mario's pos attribute at a given level
  * Return: 
  *   int*: Mario's position
  * Parameters: 
  *   int levelNum: the desired level to get Mario's position from
  */
 int* Mario::getPosAtLevel(int levelNum){
-    return m_pos[levelNum];
+    return pos[levelNum];
 }
 
 /* getNextMove()
- * Accessor for Mario's m_nextMove attribute
+ * Accessor for Mario's nextMove attribute
  * Return: 
- *   int*: m_nextMove
+ *   int*: nextMove
  * Parameters: 
  *   n/a
  */
 int* Mario::getNextMove(){
-    return m_nextMove;
+    return nextMove;
 }
 
 /* isStaying()
- * Accessor for Mario's m_stayPut attribute
+ * Accessor for Mario's stayPut attribute
  * Return: 
- *   bool: m_stayPut
+ *   bool: stayPut
  * Parameters: 
  *   n/a
  */
 bool Mario::isStaying() const{
-    return m_stayPut;
+    return stayPut;
 }
 
 /* getAction()
- * Accessor for Mario's m_action attribute
+ * Accessor for Mario's action attribute
  * Return: 
- *   std::string: m_action
+ *   std::string: action
  * Parameters: 
  *   n/a
  */
 std::string Mario::getAction(){
-    return m_action;
+    return action;
 }
 
 /* setPos()
- * Mutator for Mario's m_action attribute
+ * Mutator for Mario's action attribute
  * Return: 
  *   void
  * Parameters: 
@@ -416,17 +438,17 @@ std::string Mario::getAction(){
  *   int x: the new X position
  */
 void Mario::setPos(int levelNum, int y, int x){
-    m_pos[levelNum][0] = y;
-    m_pos[levelNum][1] = x;
+    pos[levelNum][0] = y;
+    pos[levelNum][1] = x;
 }
 
 /* setPos()
- * Mutator for Mario's m_currentLevel attribute
+ * Mutator for Mario's currentLevel attribute
  * Return: 
  *   void
  * Parameters: 
  *   int levelNum: the level number to change
  */
 void Mario::setLevel(int levelNum){
-    m_currentLevel = levelNum;
+    currentLevel = levelNum;
 }

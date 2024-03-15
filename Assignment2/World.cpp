@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-using namespace std;
 
 //Constructors & Destructor
 
@@ -17,14 +16,18 @@ using namespace std;
 World::World(){
     srand(time(0));
 
-    m_player = nullptr;
-    m_worldLog = nullptr;
-    m_numLevels = 0;
-    m_gridDim = 0;
-    m_marioLives = 0;
-    m_cP = m_nP = m_gP = m_kP = m_mP = 0;
-    m_outputFileName = nullptr;
-    m_world = nullptr;
+    player          = nullptr;
+    worldLog        = nullptr;
+    numLevels       = 0;
+    gridDim         = 0;
+    marioLives      = 0;
+    coinChance      = 0;
+    nothingChance   = 0;
+    goombaChance    = 0;
+    koopaChance     = 0;
+    mushroomChance  = 0;
+    outputFileName  = nullptr;
+    world           = nullptr;
 }
 
 /* World()
@@ -36,34 +39,34 @@ World::World(){
 World::World(int* specs, char* outputFileName){
     srand(time(0));
 
-    m_numLevels = specs[0];
-    m_gridDim = specs[1];
-    m_marioLives = specs[2];
-    m_cP = specs[3];
-    m_nP = specs[4];
-    m_gP = specs[5];
-    m_kP = specs[6];
-    m_mP = specs[7];
-    m_outputFileName = outputFileName;
+    numLevels = specs[0];
+    gridDim = specs[1];
+    marioLives = specs[2];
+    coinChance = specs[3];
+    nothingChance= specs[4];
+    goombaChance = specs[5];
+    koopaChance = specs[6];
+    mushroomChance = specs[7];
+    this->outputFileName = outputFileName;
 
-    m_player = new Mario(m_marioLives, m_numLevels);
-    m_worldLog = new FileIO(outputFileName);
+    player = new Mario(marioLives, numLevels);
+    worldLog = new FileIO(outputFileName);
 }
 
 /* World()
  * Destructor: deallocated the world & player
  */
 World::~World(){
-    if(m_world != nullptr){
-        for(int i = 0; i < m_numLevels; ++i) {
-            for(int j = 0; j < m_gridDim; ++j){
-                delete[] m_world[i][j];
+    if(world != nullptr){
+        for(int i = 0; i < numLevels; ++i) {
+            for(int j = 0; j < gridDim; ++j){
+                delete[] world[i][j];
             }
-            delete[] m_world[i];
+            delete[] world[i];
         }
-        delete[] m_world;
+        delete[] world;
     }
-        delete m_player;
+        delete player;
 
 }
 
@@ -76,42 +79,42 @@ World::~World(){
 bool World::generateWorld(){
     bool success = true;
 
-    if(m_gridDim < 2){
-        cout << "The grid is too small to populate!" << endl;
+    if(gridDim < 2){
+        std::cout << "The grid is too small to populate!" << std::endl;
         success = false;
     }
     else{
         //Initializing each level in the world
-        m_world = new char**[m_numLevels];
-        for(int i = 0; i < m_numLevels; ++i){
+        world = new char**[numLevels];
+        for(int i = 0; i < numLevels; ++i){
 
-            m_world[i] = new char*[m_gridDim];
-            for(int j = 0; j < m_gridDim; ++j){
-                m_world[i][j] = new char[m_gridDim];
+            world[i] = new char*[gridDim];
+            for(int j = 0; j < gridDim; ++j){
+                world[i][j] = new char[gridDim];
 
-                for(int k = 0; k < m_gridDim; ++k){
-                    m_world[i][j][k] = generateSquare();
+                for(int k = 0; k < gridDim; ++k){
+                    world[i][j][k] = generateSquare();
                 }
             }
 
             //After filling out the grid, add only one of each Mario, boss, and warp pipe
             int numPipes = 1;
-            if(i == m_numLevels - 1){
+            if(i == numLevels - 1){
                 numPipes = 0;
             }
             char items[3] = {'H', 'b', 'w'};
             for(int l = 0; l < 2 + numPipes; ++l){
-                int coords[2] = {rand() % m_gridDim, rand() % m_gridDim};
-                while(m_world[i][coords[0]][coords[1]] == 'H' || 
-                      m_world[i][coords[0]][coords[1]] == 'b' || 
-                      m_world[i][coords[0]][coords[1]] == 'w'){
-                    coords[0] = rand() % m_gridDim;
-                    coords[1] = rand() % m_gridDim;
+                int coords[2] = {rand() % gridDim, rand() % gridDim};
+                while(world[i][coords[0]][coords[1]] == 'H' ||
+                      world[i][coords[0]][coords[1]] == 'b' ||
+                      world[i][coords[0]][coords[1]] == 'w'){
+                    coords[0] = rand() % gridDim;
+                    coords[1] = rand() % gridDim;
                 }
-                m_world[i][coords[0]][coords[1]] = items[l];
+                world[i][coords[0]][coords[1]] = items[l];
 
                 if(items[l] == 'H'){
-                    m_player->setPos(i, coords[0], coords[1]);
+                    player->setPos(i, coords[0], coords[1]);
                 }
             }
         }
@@ -129,19 +132,19 @@ char World::generateSquare(){
     int spotRNG = rand() % 100 + 1;
     char result  = '\0';
 
-    if(spotRNG <= m_cP){
+    if(spotRNG <= coinChance){
         result = 'c';
     }
-    else if(spotRNG <= (m_cP + m_nP)){
+    else if(spotRNG <= (coinChance + nothingChance)){
         result = 'x';
     }
-    else if(spotRNG <= (m_cP + m_nP + m_gP)){
+    else if(spotRNG <= (coinChance + nothingChance + goombaChance)){
         result = 'g';
     }
-    else if(spotRNG <= (m_cP + m_nP + m_gP + m_kP)){
+    else if(spotRNG <= (coinChance + nothingChance + goombaChance + koopaChance)){
         result = 'k';
     }
-    else if(spotRNG <= (m_cP + m_nP + m_gP + m_kP + m_mP)){
+    else if(spotRNG <= (coinChance + nothingChance + goombaChance + koopaChance + mushroomChance)){
         result = 'm';
     }
 
@@ -158,24 +161,17 @@ char World::generateSquare(){
  */
 bool World::playLevel(int levelNum) {
     bool levelComplete = false;
-    m_player->setLevel(levelNum);
+    player->setLevel(levelNum);
 
-    while (m_player->isAlive() && !levelComplete) {
-        int powerLevelBeforeMove = m_player->getPowerLevel();
-        levelComplete = m_player->move(m_world[levelNum], m_gridDim);
+    while (player->isAlive() && !levelComplete) {
+        int powerLevelBeforeMove = player->getPowerLevel();
+        levelComplete = player->move(world[levelNum], gridDim);
 
-        m_worldLog->writeToLog(levelNum,
-                               m_player->getPosAtLevel(levelNum),
-                               powerLevelBeforeMove,
-                               m_player->getAction(),
-                               m_player->getLives(),
-                               m_player->getCoins(),
-                               m_player->getNextMove(),
-                               m_player->isStaying(),
-                               m_world[levelNum],
-                               m_gridDim);
+        worldLog->writeToLog(levelNum,player->getPosAtLevel(levelNum),powerLevelBeforeMove,
+                             player->getAction(),player->getLives(),player->getCoins(),
+                               player->getNextMove(),player->isStaying(),world[levelNum],
+                                gridDim);
     }
-
     return levelComplete;
 }
 
@@ -188,24 +184,23 @@ bool World::playLevel(int levelNum) {
  */
 bool World::start(){
     bool success = true;
-    cout << "\nWelcome to Not So Super Mario Bros! " << endl;
     if(!generateWorld()){
-        cout << "World generation unsuccessful." << endl;
+        std::cout << "World generation unsuccessful." << std::endl;
         success = false;
     }
     else{
-        cout << "World generation successful! Beginning  simulation...\n   ";
-        for(int i = 0; i < m_numLevels; ++i){
-            m_worldLog->displayLevel(m_world[i], i, m_gridDim);
-            if(!playLevel(i) && !(m_player->isAlive())){
-                m_worldLog->writeLogEnd('l', m_player->getTotalSteps());
+        std::cout << "\n\nWORLD GENERATION SUCCESS \n   ";
+        for(int i = 0; i < numLevels; ++i){
+            worldLog->displayLevel(world[i], i, gridDim);
+            if(!playLevel(i) && !(player->isAlive())){
+                worldLog->writeLogEnd("lost", player->getTotalSteps());
                 break;
             }
         }
-        if(m_player->isAlive()){
-            m_worldLog->writeLogEnd('w', m_player->getTotalSteps());
+        if(player->isAlive()){
+            worldLog->writeLogEnd("win", player->getTotalSteps());
         }
-        cout << "\n\nSimulation Terminating! " << endl;
+        std::cout << "\n\nTerminating! " << std::endl;
     }
 
     return success;

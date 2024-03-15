@@ -19,11 +19,11 @@ int main(int argc, char* argv[]){
     }
 
 
-    World worldGame(specs, argv[2]);
-    if(!worldGame.start()){
+    World* worldGame = new World(specs, argv[2]);
+    if(!worldGame->start()){
         cout << "Unable to start simulation.\n";
         return -1;
     }
-
+delete worldGame;
     return 0;
 }

@@ -4,19 +4,19 @@
 
 class Mario{
     private:
-        //Attributes
-        int m_lives;                //Mario's lives
-        int m_coins;        //Mario's coins
-        int m_powerLevel;           //Mario's power level
-        int m_enemiesDefeatedCounter; //For calculating if Mario gets a free life on kill #7
-        int m_totalSteps;       //Total steps Mario hs taken
-        int m_currentLevel;      //The current level Mario's on
-        int m_totalLevels;      //The total number of levels in the simulation (for allocating m_pos)
-        bool m_alive;           //Is Mario alive?
-        int** m_pos;            //Mario's position ([y, x], per level)
-        int m_nextMove[2];      //Mario's next move
-        bool m_stayPut;         //Is Mario able to move on from his current position?
-        std::string m_action; //The action took by Mario in a round
+    //Attributes
+        int lives;             //Mario's lives
+        int coins;            //Mario's coins
+        int powerLevel;           //Mario's power level
+        int enemiesDefeatedCounter; //For calculating if Mario gets a free life on kill #7
+        int totalSteps;       //Total steps Mario hs taken
+        int currentLevel;     //The current level Mario's on
+        int numLevels;      //The total number of levels in the simulation (for allocating pos)
+        bool alive;           //Is Mario alive?
+        int** pos;            //Mario's position ([y, x], per level)
+        int nextMove[2];      //Mario's next move
+        bool stayPut;         //Is Mario able to move on from his current position?
+        std::string action;   //The action took by Mario in a round
 
         //Methods
         void generateNextMove();
@@ -24,33 +24,32 @@ class Mario{
         void collectCoin();
         void collectMushroom();
         bool handleNPC(char npc);
-        bool fightEnemy(int winPercent, int drain);
         void enemyDefeated();
         void decreasePL(int scale);
 
     public:
         //Constructors & Destructor
-        Mario();
-        Mario(int lives, int numLevels);
-        virtual~Mario();
+        Mario();                         //Default constructor
+        Mario(int lives, int numLevels); //overloaded Constructor
+        virtual~Mario();                 //virtual Destructor
 
         //Methods
-        bool move(char** level, int gridDim);
+        bool move(char** level, int gridDim); //Move Mario
 
-        //Accessors
-        int getLives() const;
-        int getCoins() const;
-        int getPowerLevel() const;
-        int getTotalSteps() const;
-        bool isAlive() const;
-        int* getPosAtLevel(int levelNum);
-        int* getNextMove();
-        bool isStaying() const;
-        std::string getAction();
+        //Getters
+        int getLives() const;             //Get Mario's lives
+        int getCoins() const;             //Get Mario's coins
+        int getPowerLevel() const;        //Get Mario's power level
+        int getTotalSteps() const;        //Get Mario's total steps
+        bool isAlive() const;             //Is Mario alive?
+        int* getPosAtLevel(int levelNum); //Get Mario's position at a level
+        int* getNextMove();               //Get Mario's next move
+        bool isStaying() const;           //Is Mario staying put?
+        std::string getAction();          //Get Mario's action
 
-        //Mutators
-        void setPos(int levelNum, int y, int x); 
-        void setLevel(int levelNum);
+        //Setters
+        void setPos(int levelNum, int y, int x); //Set Mario's position
+        void setLevel(int levelNum); //Set Mario's level
 };
 
 #endif
