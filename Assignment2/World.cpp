@@ -102,7 +102,7 @@ bool World::generateWorld(){
                 numPipes = 0;
             }
             char items[3] = {'H', 'b', 'w'};
-            for(int l = 0; l < 2 + numPipes; ++l){
+            for(int n = 0; n < 2 + numPipes; ++n){
                 int coords[2] = {rand() % gridDim, rand() % gridDim};
                 while(world[i][coords[0]][coords[1]] == 'H' ||
                       world[i][coords[0]][coords[1]] == 'b' ||
@@ -110,9 +110,10 @@ bool World::generateWorld(){
                     coords[0] = rand() % gridDim;
                     coords[1] = rand() % gridDim;
                 }
-                world[i][coords[0]][coords[1]] = items[l];
+                world[i][coords[0]][coords[1]] = items[n];
 
-                if(items[l] == 'H'){mario->setPos(i, coords[0], coords[1]);
+                if(items[n] == 'H'){
+                    mario->setPos(i, coords[0], coords[1]);
                 }
             }
         }
