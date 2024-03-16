@@ -40,7 +40,6 @@ FileIO::~FileIO(){
  * Parameters:
  *   char* fileName: The name of the file to read from
  *   int* specsHolder: The memory address of the array to populate with the int specs
- *   int numOfSpecs: The number of specifications in the file
  */
 bool FileIO::readFile(char* fileName, int* specsHolder){
     std::ifstream fileIn;
@@ -86,19 +85,28 @@ void FileIO::displayLevel(char** level, int lvlNum, int gridDim){
 }
 
 /* writeToLog()
- * Writes out the state of a round to the log
- * String is used for action due to its variable size (the various actions Mario takes have different string lengths)
+ * Writes the current state of the game to the log file.
  * Parameters:
- *   int lvlNum: The number of the level being played
- *   int* pos: Mario's position
- *   int powerLevel: Mario's power level
+ *   int lvlNum: The current level number.
+ *   int* pos: A pointer to an array containing the current position of Mario.
+ *   int powerLevel: The current power level of Mario.
+ *   const std::string& action: The action that Mario has just performed.
+ *   int numLives: The current number of lives Mario has.
+ *   int numCoins: The current number of coins Mario has collected.
+ *   const int* nextDir: A pointer to an array containing the next direction of Mario.
+ *   bool isStaying: A boolean indicating whether Mario is staying put or not.
+ *   char** level: A 2D array representing the current level.
+ *   int gridDim: The dimension of the grid of the current level.
  */
 void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, const std::string& action, int numLives,
                         int numCoins, const int* nextDir, bool isStaying, char** level, int gridDim){
+    // Open the log file in append mode
     log.open(outputFile, std::ios::app);
+
+    // Write the current state of the game to the log file
     log << "=======================================\n";
-    log << "Level Number " << lvlNum  << ", \n";
-    log << "Mario is at (" << pos[1] + 1 << "," << pos[0] + 1 << ") \n";
+    log << "Level Number " << lvlNum  << " \n";
+    log << "Mario is at (" << pos[1] + 1 << ','<<pos[0] + 1 << ") \n";
     log << "Power level " << powerLevel << " \n";
     log << action << " ";
     if (numLives == 1) {
@@ -114,17 +122,30 @@ void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, const std::string&
     }
     log << std::endl;
 
-
-
-    if(numLives > 0){
-        std::string dir = isStaying ? "STAY PUT" : ((nextDir[0] == 0) ?
-                                                    ((nextDir[1] == 1) ? "DOWN" : "UP") :
-                                                    ((nextDir[1] == 1) ? "RIGHT" : "LEFT"));
-        log << "Mario's next move: " << dir << "\n";
-
+    // Write Mario's next move if he still has lives
+   std::string dir;
+if (isStaying) {
+    dir = "STAY PUT";
+} else {
+    if (nextDir[0] == 0) {
+        if (nextDir[1] == 1) {
+            dir = "DOWN";
+        } else {
+            dir = "UP";
+        }
+    } else {
+        if (nextDir[1] == 1) {
+            dir = "RIGHT";
+        } else {
+            dir = "LEFT";
+        }
     }
+}
+        log << "Mario's next move: " << dir << "\n";
+    
     log << "=======================================\n";
 
+    // Write the current level to the log file
     for(int i = 0; i < gridDim; ++i){
         for (int j = 0; j < gridDim; ++j){
             log << level[i][j] << " ";
@@ -133,9 +154,10 @@ void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, const std::string&
     }
     log << '\n';
 
+    // Close the log file
     log.close();
-
 }
+
 
 /* writeLogEnd()
  * Writes out the state of the game after completion to the log
@@ -146,12 +168,12 @@ void FileIO::writeToLog(int lvlNum, int* pos, int powerLevel, const std::string&
 void FileIO::writeLogEnd(std::string state, int moves){
     log.open(outputFile, std::ios::app);
     if(state == "lost"){
-        log << "Mario lost better luck next time . ";
+        log << "Mario lost better luck next time  ";
     } else if(state == "win"){
         log << "Mario Won! :). ";
     } else {
         log << "Don't know what happened";
     }
-    log << moves << " steps" << " taken." << std::endl;
+    log << "Total steps taken: " << moves ;
     log.close();
 }

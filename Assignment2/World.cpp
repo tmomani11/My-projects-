@@ -16,7 +16,7 @@
 World::World(){
     srand(time(0));
 
-    mario= nullptr;
+    mario           = nullptr;
     worldLog        = nullptr;
     numLevels       = 0;
     gridDim         = 0;
@@ -104,14 +104,12 @@ bool World::generateWorld(){
             char items[3] = {'H', 'b', 'w'};
             for(int n = 0; n < 2 + numPipes; ++n){
                 int coords[2] = {rand() % gridDim, rand() % gridDim};
-                while(world[i][coords[0]][coords[1]] == 'H' ||
-                      world[i][coords[0]][coords[1]] == 'b' ||
+                while(world[i][coords[0]][coords[1]] == 'H' ||world[i][coords[0]][coords[1]] == 'b' ||
                       world[i][coords[0]][coords[1]] == 'w'){
                     coords[0] = rand() % gridDim;
                     coords[1] = rand() % gridDim;
                 }
                 world[i][coords[0]][coords[1]] = items[n];
-
                 if(items[n] == 'H'){
                     mario->setPos(i, coords[0], coords[1]);
                 }
@@ -165,7 +163,9 @@ bool World::playLevel(int levelNum) {
         int powerLevelBeforeMove =mario->getPowerLevel();
         levelComplete =mario->move(world[levelNum], gridDim);
 
-        worldLog->writeToLog(levelNum,mario->getPosAtLevel(levelNum),powerLevelBeforeMove,mario->getAction(),mario->getLives(),mario->getCoins(),
+        worldLog->writeToLog(levelNum,mario->getPosAtLevel(levelNum),
+                             powerLevelBeforeMove,mario->getAction(),mario->getLives(),
+                             mario->getCoins(),
                              mario->getNextMove(),mario->isStaying(),world[levelNum],
                                 gridDim);
     }
@@ -197,7 +197,7 @@ bool World::start(){
         if(mario->isAlive()){
             worldLog->writeLogEnd("win", mario->getTotalSteps());
         }
-        std::cout << "\n\nTerminating! " << std::endl;
+        std::cout << "\n\nGAME OVER! " << std::endl;
     }
     return success;
 }
