@@ -99,10 +99,10 @@ void MonoStack<T>::push(T c){ //O(max) linear
 template <typename T>
 T MonoStack<T>::pop(){ //O(1) better tell user to check if empty first
   if(isEmpty()){
-    cout << "Array is empty. Cannot pop" << endl;
+    throw std::out_of_range("Array is empty. Cannot pop");
   } else{
-  --count;
-  return stackArr[top--];
+    --count;
+    return stackArr[top--];
   }
 }
 
