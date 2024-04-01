@@ -4,7 +4,8 @@
 using namespace std;
 
 int main(int argc, char *argv[]){
-  SpeakerView* s1 = new SpeakerView(argv[1]);
+  string inputfile = "sampleInput.txt";
+  SpeakerView* s1 = new SpeakerView(inputfile);
   delete s1;
   return 0;
 }
