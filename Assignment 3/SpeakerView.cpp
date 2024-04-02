@@ -36,6 +36,8 @@ SpeakerView::SpeakerView(string intF){
 
     // Create a new MonoStack object
     MonoStack<double>* myStack = new MonoStack<double>(m_lines, 'd');
+    MonoStack<double> *outputStack = new MonoStack<double>();
+
     int atCurrSpace = 0;
     int atNextSpace = 0;
     // Loop over the number of heights
@@ -59,20 +61,15 @@ SpeakerView::SpeakerView(string intF){
             getline(readfile, line);
         }
 
-       MonoStack<double> *outputStack = new MonoStack<double>();
         while(!myStack->isEmpty()){
             outputStack->push(myStack->pop());
         }
-        // Print the number of elements that can "see"
         cout << "In column " << i << " there are " << myStack->size() << " that can see. ";
-        // Get the size of the stack
         int stackSize = outputStack->size();
         cout << "Their heights are: ";
-        // Loop over the stack and print the heights
         for(int k = 0; k < stackSize; ++k){
             cout << outputStack->pop();
-            // Print a comma after each height except the last one
-            if(k != stackSize-1){
+            if(k != stackSize - 1){
                 cout << ", ";
             }
         }
@@ -92,7 +89,9 @@ SpeakerView::SpeakerView(string intF){
         atCurrSpace = line.find(' ', atNextSpace);
     }
     // Delete the MonoStack object
+    delete outputStack;
     delete myStack;
+
 }
 
 // Destructor for the SpeakerView class
