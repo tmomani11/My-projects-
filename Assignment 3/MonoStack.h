@@ -34,7 +34,7 @@ MonoStack<T>::MonoStack(){ //O(1)
   top = -1;
   count = 0;
   max = 0;
-  stackArr = NULL;
+  stackArr = new T[10];
   typeStack = 'i';
 }
 

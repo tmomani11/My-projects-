@@ -58,14 +58,19 @@ SpeakerView::SpeakerView(string intF){
             // Read the next line of the file
             getline(readfile, line);
         }
+
+       MonoStack<double> *outputStack = new MonoStack<double>();
+        while(!myStack->isEmpty()){
+            outputStack->push(myStack->pop());
+        }
         // Print the number of elements that can "see"
         cout << "In column " << i << " there are " << myStack->size() << " that can see. ";
         // Get the size of the stack
-        int stackSize = myStack->size();
+        int stackSize = outputStack->size();
         cout << "Their heights are: ";
         // Loop over the stack and print the heights
         for(int k = 0; k < stackSize; ++k){
-            cout << myStack->pop();
+            cout << outputStack->pop();
             // Print a comma after each height except the last one
             if(k != stackSize-1){
                 cout << ", ";
