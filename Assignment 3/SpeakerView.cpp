@@ -5,53 +5,49 @@
 using namespace std;
 
 // Constructor for the SpeakerView class
-SpeakerView::SpeakerView(string filename){
-    int atSpace   = 0;
-    int nextSpace = 0;
-    columns       = 1;
-    rows          = 0;
+SpeakerView::SpeakerView(string filename) {
+   unsigned int atSpace   = 0;
+   unsigned int nextSpace = 0;
+    columns               = 1;
+    rows                  = 0;
     ifstream readfile(filename); // Open the input file
     string line;
 
     // Get the number of rows
-    while(getline(readfile, line)){ // Count the number of lines in the file
+    while (getline(readfile, line)) { // Count the number of lines in the file
         rows++;
     }
-    readfile.clear();
-    readfile.seekg(0);
-
     // Get the number of columns
     getline(readfile, line);
-    for(char i : line){ // Count the number of spaces in the first line
-        if(i == ' '){
+    for (char i: line) { // Count the number of spaces in the first line
+        if (i == ' ') {
             columns++;
         }
     }
 
     // Create stacks
     MonoStack<double> *stack = new MonoStack<double>(rows, 'd'); // Stack for the current column
-    MonoStack<double> *output  = new MonoStack<double>(); // Stack for the output
-    for(int i = 0; i < columns; ++i){
-        cout << columns << endl;// For each column
+    MonoStack<double> *output = new MonoStack<double>(); // Stack for the output
+    for (int i = 0; i < columns; ++i) {
         readfile.clear();
         readfile.seekg(0);
         getline(readfile, line);
-        for(int j = 0; j < rows; ++j){
+        for (int j = 0; j < rows; ++j) {
             nextSpace = line.find(' ', atSpace); // Find the next space
-            string c = line.substr(atSpace, nextSpace); // Get the string between the current space and the next space
-            double pHeight = stod(c); // Convert the string to a double
-            stack->push(pHeight); // Push the height onto the stack
+            string value = line.substr(atSpace,nextSpace); // Get the string between the current space// and the next space
+            double personHeight = stod(value); // Convert the string to a double
+            stack->push(personHeight); // Push the height onto the stack
             getline(readfile, line); // Read the next line
         }
-        cout << "In column " << i  << " there are " << stack->size() << " that can see. ";
+        cout << "In column " << i << " there are " << stack->size() << " that can see. ";
         int size = stack->size();
         cout << "Their heights are: ";
-        while(!stack->isEmpty()){ // While the stack is not empty
+        while (!stack->isEmpty()) { // While the stack is not empty
             output->push(stack->pop()); // Pop the top of the stack and push it onto the output stack
         }
-        for(int k = 0; k < size; ++k){ // For each element in the output stack
-            cout << output->pop(); // Pop the top of the output stack and print it
-            if(k != size-1){
+        for (int k = 0; k < size; ++k) {
+            cout << output->pop();
+            if (k != size - 1) {
                 cout << ", ";
             }
         }
@@ -61,9 +57,8 @@ SpeakerView::SpeakerView(string filename){
         getline(readfile, line);
         atSpace = line.find(' ', nextSpace); // Find the next space for the next column
     }
-    delete stack; // Delete the stack for the current column
-    delete output; // Delete the output stack
+    delete stack;
+    delete output;
 }
-
 // Destructor for the SpeakerView class
 SpeakerView::~SpeakerView()= default;

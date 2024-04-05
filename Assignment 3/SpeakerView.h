@@ -9,10 +9,10 @@
 
 class SpeakerView{
     public:
-        SpeakerView(std::string filename);
-        virtual ~SpeakerView();
+        SpeakerView(std::string filename);  //constructor
+        virtual ~SpeakerView();    //destructor
     private:
-        int columns;
-        int rows;
+        int columns; //number of columns
+        int rows;    // number of rows
 };
 #endif
