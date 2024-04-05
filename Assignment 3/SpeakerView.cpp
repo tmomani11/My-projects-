@@ -39,16 +39,16 @@ SpeakerView::SpeakerView(string filename) {
             stack->push(personHeight); // Push the height onto the stack
             getline(readfile, line); // Read the next line
         }
-        cout << "In column " << i << " there are " << stack->size() << " that can see. ";
         int size = stack->size();
+        cout << "In column " << i << " there are " << size << " that can see. ";
         cout << "Their heights are: ";
-        while (!stack->isEmpty()) { // While the stack is not empty
-            output->push(stack->pop()); // Pop the top of the stack and push it onto the output stack
+        while (!stack->isEmpty()) {
+            output->push(stack->pop());
         }
         for (int k = 0; k < size; ++k) {
             cout << output->pop();
             if (k != size - 1) {
-                cout << ", ";
+                cout << ",";
             }
         }
         cout << " inches. " << endl;
