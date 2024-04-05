@@ -7,18 +7,12 @@
 #include <fstream>
 #include <string>
 
-using namespace std;
-
 class SpeakerView{
     public:
-        SpeakerView(string intF);
+        SpeakerView(std::string filename);
         virtual ~SpeakerView();
-
-        
     private:
-        int m_lines;
-        int m_heights;
+        int columns;
+        int rows;
 };
-
-
 #endif

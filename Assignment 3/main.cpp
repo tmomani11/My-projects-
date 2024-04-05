@@ -1,4 +1,3 @@
-#include "MonoStack.h"
 #include "SpeakerView.h"
 #include <iostream>
 using namespace std;

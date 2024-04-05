@@ -1,9 +1,7 @@
 #ifndef MONOSTACK_H
 #define MONOSTACK_H
 
-#include <cstdlib>
 #include <iostream>
-using namespace std;
 
 template <typename T>
 class MonoStack{
@@ -97,7 +95,7 @@ void MonoStack<T>::push(T c){ //O(max) linear
 
 
 template <typename T>
-T MonoStack<T>::pop(){ //O(1) better tell user to check if empty first
+T MonoStack<T>::pop(){ //O(1)
   if(isEmpty()){
     throw std::out_of_range("Array is empty. Cannot pop");
   } else{
@@ -107,9 +105,9 @@ T MonoStack<T>::pop(){ //O(1) better tell user to check if empty first
 }
 
 template <typename T>
-T MonoStack<T>::pop(int pos){ //O(1) better tell user to check if empty first
+T MonoStack<T>::pop(int pos){ //O(1)
   if(isEmpty()){
-    cout << "Array is empty. Cannot pop" << endl;
+      std::cout << "Array is empty. Cannot pop" << std::endl;
   } else{
   --count;
   return stackArr[pos];
@@ -117,7 +115,7 @@ T MonoStack<T>::pop(int pos){ //O(1) better tell user to check if empty first
 }
 
 template <typename T>
-T MonoStack<T>::peek(){ //O(1) what about if empty?
+T MonoStack<T>::peek(){ //O(1)
   return stackArr[top];
 }
 
