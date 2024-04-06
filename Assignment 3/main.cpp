@@ -1,10 +1,12 @@
 #include "SpeakerView.h"
 #include <iostream>
-using namespace std;
 
 int main(int argc, char *argv[]){
-  string inputfile = "sampleInput.txt";
-  SpeakerView* s1 = new SpeakerView(inputfile);
-  delete s1;
+
+  SpeakerView* speaker = new SpeakerView();
+  speaker->ProcessFile(argv[1]);
+  delete speaker;
+
+
   return 0;
 }

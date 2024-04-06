@@ -9,8 +9,9 @@
 
 class SpeakerView{
     public:
-        SpeakerView(std::string filename);  //constructor
-        virtual ~SpeakerView();    //destructor
+        SpeakerView();  //constructor
+        virtual ~SpeakerView(); //destructor
+        void ProcessFile(std::string file); // ProcessFile method
     private:
         int columns; //number of columns
         int rows;    // number of rows
