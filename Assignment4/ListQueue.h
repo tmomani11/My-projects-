@@ -3,7 +3,6 @@
 
 #include "DblList.h"
 #include <cstdlib>
-#include <iostream>
 using namespace std;
 
 template <typename T>
@@ -16,7 +15,6 @@ public:
   void add(T c);
   T remove();
   T peek();
-  void print();
 
 private:
   DblList<T>* theList;
@@ -24,58 +22,40 @@ private:
 };
 
 template <typename T>
-ListQueue<T>::ListQueue(){
+ListQueue<T>::ListQueue(){ //O(1)
   theList = new DblList<T>();
 }
 
 
 template <typename T>
-ListQueue<T>::~ListQueue(){
+ListQueue<T>::~ListQueue(){ //O(1)
   delete theList;
 }
 
 template <typename T>
-int ListQueue<T>::size(){
+int ListQueue<T>::size(){ //O(1)
   return theList->getSize();
 }
 
 template <typename T>
-bool ListQueue<T>::isEmpty(){
+bool ListQueue<T>::isEmpty(){ //O(1)
   return theList->isEmpty();
 }
 
 
 template <typename T>
-void ListQueue<T>::add(T c){
+void ListQueue<T>::add(T c){ //O(1)
   theList->addBack(c);
 }
 
 template <typename T>
-T ListQueue<T>::remove(){
-  try{
+T ListQueue<T>::remove(){ //O(1) better tell user to check if empty first
   return theList->removeFront();
-  } 
-  catch (exception& e)
-  {
-    cout << "Standard exception: " << e.what() << endl;
-  } 
 }
 
 template <typename T>
-T ListQueue<T>::peek(){
-  try
-  {
-    return theList->get(0);
-  }
-  catch(const std::exception& e)
-  {
-    cout << e.what() << '\n';
-  }
-}
-
-template <typename T>
-void ListQueue<T>::print(){
-  theList->print();
+T ListQueue<T>::peek(){ //O(1) what about if empty?
+  return theList->get(0);
 }
 
 #endif

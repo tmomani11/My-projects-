@@ -3,7 +3,6 @@
 
 #include "ListNode.h"
 
-#include <cstdlib>
 #include <iostream>
 using namespace std;
 
@@ -13,14 +12,21 @@ public:
   DblList();
   virtual ~DblList();
   void print();
+  //vanilla stuff
   int getSize();
   bool isEmpty();
-  void addBack(T data);
-  void addFront(T data);
-  void add(int pos, T data);
+
+  //additions
+  void addBack(T data); //append to back
+  void addFront(T data); //append to front
+  void add(int pos, T data); //add at specified position
+
+  //removes
   T removeBack();
   T removeFront();
   T remove(int pos);
+
+  //Accessor
   T get(int pos);
   bool contains(T data);
 
@@ -39,13 +45,10 @@ DblList<T>::DblList(){
 
 template <typename T>
 DblList<T>::~DblList(){
+  //todo - free memory
   m_size = 0;
-  if (m_front != NULL){
-    delete m_front;
-  }
-  if (m_back != NULL){
-    delete m_back;
-  }
+  m_front = NULL;
+  m_back = NULL;
 }
 
 template <typename T>
@@ -60,21 +63,14 @@ bool DblList<T>::isEmpty(){
 
 template <typename T>
 T DblList<T>::get(int pos){
-  try
-  {
-    int cPos = 0;
-    ListNode<T>* current = m_front;
-    while(cPos != pos){
-      current = current->m_next;
-      ++cPos;
-    }
-    return current->m_data;
+  //first check position is valid, check if empty
+  int cPos = 0;
+  ListNode<T>* current = m_front;
+  while(cPos != pos){
+    current = current->m_next;
+    ++cPos;
   }
-  catch (exception& e)
-  {
-    cout << "Standard exception: " << e.what() << endl;
-  }
-  
+  return current->m_data;
 }
 
 template <typename T>
@@ -97,7 +93,7 @@ void DblList<T>::addFront(T data){
   if(!isEmpty()){
     m_front->m_prev = newNode;
     newNode->m_next = m_front;
-  } else{
+  } else{ //it's empty
     m_back = newNode;
   }
   m_front = newNode;
@@ -120,13 +116,13 @@ void DblList<T>::addBack(T data){
 
 template <typename T>
 void DblList<T>::add(int pos, T data){
-  if(isEmpty()){ 
-    addFront(data); 
-  } else if(pos==0){
+  if(isEmpty()){ //empty
+    addFront(data); //it's empty so ignore position
+  } else if(pos==0){ //first pos
     addFront(data);
-  } else if(pos>=m_size-1){
+  } else if(pos>=m_size-1){ //last pos
     addBack(data);
-  } else{
+  } else{ //somewhere in middle
     ListNode<T>* current = m_front;
     int cPos = 0;
     while(cPos!=pos){
@@ -144,86 +140,69 @@ void DblList<T>::add(int pos, T data){
 
 template <typename T>
 T DblList<T>::removeFront(){
-  try
-  {
-    T data;
-    data = m_front->m_data;
-    if(m_size == 1){
-      delete m_front;
-      m_front = NULL;
-      m_back = NULL;
-    } else{ 
-      ListNode<T>* currFront = m_front;
-      m_front = m_front->m_next;
-      m_front->m_prev = NULL;
-      currFront->m_next = NULL;
-      delete currFront;
-    }
-    --m_size;
-    return data;
+  //handling for empty list
+  T data;
+  data = m_front->m_data;
+  if(m_size == 1){
+    delete m_front; //free up memory
+    m_front = NULL;
+    m_back = NULL;
+  } else{ //multiple things in list
+    ListNode<T>* currFront = m_front;
+    m_front = m_front->m_next;
+    m_front->m_prev = NULL;
+    currFront->m_next = NULL;
+    delete currFront;
   }
-  catch (exception& e)
-  {
-    cout << "Standard exception: " << e.what() << endl;
-  }
-  
+  --m_size;
+  return data;
 }
 
 template <typename T>
 T DblList<T>::removeBack(){
-  try{
-    T data;
-    data = m_back->m_data;
-    if(m_size == 1){
-      delete m_front; //free up memory
-      m_front = NULL;
-      m_back = NULL;
-    } else{ //multiple things in list
-      ListNode<T>* currBack = m_back;
-      m_back = m_back->m_prev;
-      m_back->m_next = NULL;
-      currBack->m_prev = NULL;
-      delete currBack;
-    }
-    --m_size;
-    return data;
+  //handling for empty list
+  T data;
+  data = m_back->m_data;
+  if(m_size == 1){
+    delete m_front; //free up memory
+    m_front = NULL;
+    m_back = NULL;
+  } else{ //multiple things in list
+    ListNode<T>* currBack = m_back;
+    m_back = m_back->m_prev;
+    m_back->m_next = NULL;
+    currBack->m_prev = NULL;
+    delete currBack;
   }
-  catch (exception& e)
-  {
-    cout << "Standard exception: " << e.what() << endl;
-  }
+  --m_size;
+  return data;
 }
 
 template <typename T>
 T DblList<T>::remove(int pos){
-  try{
-    T data;
-    if(pos<=0){
-      data = removeFront();
-    } else if(pos >= m_size-1){
-      data = removeBack();
-    } else{
-      //Find position and remove
-      ListNode<T>* current = m_front;
-      int cPos = 0;
-      while(cPos != pos){
-        current = current->m_next;
-        ++cPos;
-      }
-      data = current->m_data;
-      current->m_prev->m_next = current->m_next;
-      current->m_next->m_prev = current->m_prev;
-      current->m_next = NULL;
-      current->m_prev = NULL;
-      delete current;
-      --m_size;
+  //check if empty
+  T data;
+  if(pos<=0){
+    data = removeFront();
+  } else if(pos >= m_size-1){
+    data = removeBack();
+  } else{
+    //Find position and remove
+    ListNode<T>* current = m_front;
+    int cPos = 0;
+    while(cPos != pos){
+      current = current->m_next;
+      ++cPos;
     }
-    return data;
+    data = current->m_data;
+    current->m_prev->m_next = current->m_next;
+    current->m_next->m_prev = current->m_prev;
+    current->m_next = NULL;
+    current->m_prev = NULL;
+    delete current;
+    --m_size;
   }
-  catch (exception& e)
-  {
-    cout << "Standard exception: " << e.what() << endl;
-  }
+  return data;
 }
 
 template <typename T>
