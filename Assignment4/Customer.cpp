@@ -18,9 +18,7 @@ Customer::Customer(int finAid, int regist, int cash, ListQueue<char> *order, int
     this->num = num;
 }
 
-/*
-~Customer() - deconstructor
-*/
+
 Customer::~Customer() {
     delete order;
 }

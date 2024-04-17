@@ -63,6 +63,7 @@ public:
     Customer* readLine(string line);
     
     void printResult();
+    void assignTime(char office,int time,int& finAid,int& registrar,int& cash);
     void printNewLine();
 
     void printMeanWait();
@@ -71,7 +72,6 @@ public:
     void printMeanIdle();
     void printLongestIdle();
     void printIdleOver5();
-
     void printFinished();
 private:
     Office *cashier;

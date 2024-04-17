@@ -7,13 +7,13 @@ CPP File for ServiceCenter that represents a Service Center with 3 Offices
 ServiceCenter(string filename) - Constructor that takes an input filename and initializes variables, calls readFile(filename)
 ~ServiceCenter() - Destructor
 
-void readFile(string filename) - Function that handles File I/O for reading from the txt file. It creates 3 Offices with respective amount of 
-Windows from the first 3 lines, and then calls passTime() for the target time, stores the amount of students that are going to be arriving, and 
+void readFile(string filename) - Function that handles File I/O for reading from the txt file. It creates 3 Offices with respective amount of
+Windows from the first 3 lines, and then calls passTime() for the target time, stores the amount of students that are going to be arriving, and
 calls readLine(line) based on number of students that creates a new Customer, and calls Office.lineUp(student) for the respective office. It will call
 passTime() until all students have finished.
 
 void passTime() - Simulates a single minute passing in the Service Center. Calls passTime() on each of the 3 offices, and if any of the offices have
-finished students, it pops the student, and if the student has offices left to go to, it calls Office.lineUp() at the respective office, else if the 
+finished students, it pops the student, and if the student has offices left to go to, it calls Office.lineUp() at the respective office, else if the
 student is fully finished, then it adds the studet to finished
 
 Customer* readLine(string line) - Takes a string line and returns a Customer created from that line; Format: time1 time2 time3 office1 office2 office3
@@ -27,7 +27,7 @@ void printIdleOver5() - Prints the number of windows idle for over 5 minutes acr
 
 void printResult() - Function that prints out the 6 above functions to display
 
-void printFinished() - Print Function that prints out the finished ListQ of students 
+void printFinished() - Print Function that prints out the finished ListQ of students
 void printNewLine() - Prints out a Line to separate output
 */
 
@@ -59,8 +59,8 @@ ServiceCenter::~ServiceCenter() {
 }
 
 /*
-void readFile(string filename) - Function that handles File I/O for reading from the txt file. It creates 3 Offices with respective amount of 
-Windows from the first 3 lines, and then calls passTime() for the target time, stores the amount of students that are going to be arriving, and 
+void readFile(string filename) - Function that handles File I/O for reading from the txt file. It creates 3 Offices with respective amount of
+Windows from the first 3 lines, and then calls passTime() for the target time, stores the amount of students that are going to be arriving, and
 calls readLine(line) based on number of students that creates a new Customer, and calls Office.lineUp(student) for the respective office. It will call
 passTime() until all students have finished.
 */
@@ -153,9 +153,9 @@ Customer* ServiceCenter::readLine(string line) {
     int c;
     fullLine >> c;
 
-    int finAid;
-    int regist;
-    int cash;
+    int finAid = 0;
+    int regist = 0;
+    int cash   = 0 ;
 
     char first;
     fullLine >> first;
@@ -170,47 +170,29 @@ Customer* ServiceCenter::readLine(string line) {
     order->add(second);
     order->add(third);
 
-    // this is a dogshit way to parse the line but it works so meh
-    switch (first) {
-        case 'F':
-            finAid = a;
-            break;
-        case 'R':
-            regist = a;
-            break;
-        case 'C':
-            cash = a;
-            break;
-    }
 
-    switch (second) {
-        case 'F':
-            finAid = b;
-            break;
-        case 'R':
-            regist = b;
-            break;
-        case 'C':
-            cash = b;
-            break;
-    }
-
-    switch (third) {
-        case 'F':
-            finAid = c;
-            break;
-        case 'R':
-            regist = c;
-            break;
-        case 'C':
-            cash = c;
-            break;
-    }
+    assignTime(first,a,finAid,regist,cash);
+    assignTime(second,b,finAid,regist,cash);
+    assignTime(third,c,finAid,regist,cash);
 
     Customer *student = new Customer(finAid, regist, cash, order, numStudents);
-    cout << "Student " << numStudents << " needs: " << student->getFinAid() << " min at FinAid, " << student->getRegist() << " min at Regist, " 
+    cout << "Student " << numStudents << " needs: " << student->getFinAid() << " min at FinAid, " << student->getRegist() << " min at Regist, "
     << student->getCash() << " min at Cashier." << endl;
     return student;
+}
+void ServiceCenter::assignTime(char office, int time, int &finAid, int &registrar, int &cash) {
+
+    switch (office) {
+        case 'F':
+            finAid = time;
+            break;
+        case 'R':
+            registrar = time;
+            break;
+        case 'C':
+            cash = time;
+            break;
+    }
 }
 
 void ServiceCenter::printFinished() {
@@ -222,7 +204,7 @@ void ServiceCenter::printFinished() {
 
 /*
 void passTime() - Simulates a single minute passing in the Service Center. Calls passTime() on each of the 3 offices, and if any of the offices have
-finished students, it pops the student, and if the student has offices left to go to, it calls Office.lineUp() at the respective office, else if the 
+finished students, it pops the student, and if the student has offices left to go to, it calls Office.lineUp() at the respective office, else if the
 student is fully finished, then it adds the studet to finished
 */
 void ServiceCenter::passTime() {
@@ -360,3 +342,4 @@ void ServiceCenter::printIdleOver5() {
 void ServiceCenter::printNewLine() {
     cout << "-------------------------------------------------------------------" << endl;
 }
+
