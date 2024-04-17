@@ -251,7 +251,6 @@ void ServiceCenter::passTime() {
         Customer* student = registrar->getFinished()->remove();
         if (student->getOrder()->isEmpty()) {
             finished->addBack(student);
-            //cout << "THE SIZE OF FINISHED IN SERVICECENTER IS " << finished << endl;
         }
         else {
             char dest = student->getOrder()->peek();
@@ -262,15 +261,34 @@ void ServiceCenter::passTime() {
     }
 }
 
-void ServiceCenter::printResult() {
-    printMeanWait();
-    printLongestWait();
-    printWaitOver10();
-    printMeanIdle();
-    printLongestIdle();
-    printIdleOver5();
-}
 
+void ServiceCenter::printResult() {
+    cout << "\n==================== Simulation Results ====================\n";
+
+    cout << "\nCashier Office Statistics:\n";
+    cout << "  -> Mean Wait Time: " << cashier->getMeanWait() << " minutes\n";
+    cout << "  -> Longest Wait Time: " << cashier->getLongestWait() << " minutes\n";
+    cout << "  -> Mean Idle Time: " << cashier->getMeanIdle() << " minutes\n";
+    cout << "  -> Longest Idle Time: " << cashier->getLongestIdle() << " minutes\n";
+
+    cout << "\nFinancial Aid Office Statistics:\n";
+    cout << "  -> Mean Wait Time: " << finAid->getMeanWait() << " minutes\n";
+    cout << "  -> Longest Wait Time: " << finAid->getLongestWait() << " minutes\n";
+    cout << "  -> Mean Idle Time: " << finAid->getMeanIdle() << " minutes\n";
+    cout << "  -> Longest Idle Time: " << finAid->getLongestIdle() << " minutes\n";
+
+    cout << "\nRegistrar Office Statistics:\n";
+    cout << "  -> Mean Wait Time: " << registrar->getMeanWait() << " minutes\n";
+    cout << "  -> Longest Wait Time: " << registrar->getLongestWait() << " minutes\n";
+    cout << "  -> Mean Idle Time: " << registrar->getMeanIdle() << " minutes\n";
+    cout << "  -> Longest Idle Time: " << registrar->getLongestIdle() << " minutes\n";
+
+    cout << "\nOverall Statistics:\n";
+    printWaitOver10();
+    printIdleOver5();
+
+    cout << "\n===========================================================\n";
+}
 /*
 void printMeanWait()- Prints the mean student wait time for each office by calling Office.getMeanWait()
 */

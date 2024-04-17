@@ -11,7 +11,6 @@ with the parameters of the filename. It then calls ServiceCenter->printResult() 
 */
 
 #include "ServiceCenter.h"
-#include <cstdlib>
 #include <iostream>
 
 using namespace std;

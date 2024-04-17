@@ -1,9 +1,5 @@
 /*
-Spencer Au
-ID: 002385256
-spau@chapman.edu
-CPSC 350 - Section 2
-PA4
+
 
 Header File for Window that models a single window in one of the offices
 
