@@ -1,50 +1,14 @@
-/*
-
-PA4
-
-CPP File for Office that models an individual office in the service center
-
-
-Office(int size, char type)- Constructor that takes an int size representing the number of windows and a char type that is the type of office and 
-intializes other variables
-
-~Office() - Deconstructor
-
-void attendStudent() - simulates when a student goes to the window to be attended; it increments occupWindows, and adds the current wait of 
-student to totalWait. It then checks updates longestWait if applicable. Then it iterates through the office DBL of windows to call setStudent() to
-add the student to a window
-
-void passTime() - Simulates a single min passing in the Office. Iterates through the Windows in *office, and if there are any students in line, it
-pops the student and adds it to that window. If the window is finished with the student, then it adds that student to the finished ListQ and sets 
-Window.finished to false 
-
-void lineUp(Customer *student) - takes a student parameter and simulates when a student lines up in the back of the line; it calls attendStudent() 
-if any windows are open and increments numStudents
-
-double getMeanWait() - returns totalWait / numStudents
-int getLongestWait() - accessor for longestWait
-double getMeanIdle() - returns the average idle time for the office
-int getLongestIdle() - returns the longest idle time for a single window for the office
-int getIdleOver5() - returns the amount of windows that have been idle over 5 min
-
-DblList<Window*>*& getOffice() - returns a pointer to the current office
-ListQueue<Customer*>*& getFinished() - returns the finished ListQ which is the students that are finished at this office
-
-void printWindows() - debugging function that prints out the windows in the office
-void printFinishedList() - debugging function that prints out the finished ListQ
-*/
-
-#include <cstdlib>
 #include <iostream>
 #include "Window.h"
 #include "Office.h"
 
 using namespace std;
 
-/*
-Office(int size, char type)- Constructor that takes an int size representing the number of windows and a char type that is the type of office and 
-intializes other variables
-*/
+/**
+ * @brief Construct a new Office object
+ * @param size The size of the office
+ * @param type The type of the office
+ */
 Office::Office(int size, char type) {
     this->type = type;
     this->line = new ListQueue<Customer*>();
@@ -60,17 +24,26 @@ Office::Office(int size, char type) {
     numStudents = 0;
 }
 
+/**
+ * @brief Destroy the Office object
+ */
 Office::~Office() {
     delete line;
     delete finished;
     delete office;
 }
 
+/**
+ * @brief Get the Finished object
+ * @return ListQueue<Customer*>*& The finished queue
+ */
 ListQueue<Customer*>*& Office::getFinished() {
     return finished;
 }
 
-//void printFinishedList() - debugging function that prints out the finished ListQ
+/**
+ * @brief Print the finished list
+ */
 void Office::printFinishedList() {
     if (finished->isEmpty()) cout << "Finished is Empty" << endl;
     else {
@@ -81,28 +54,21 @@ void Office::printFinishedList() {
     }
 }
 
-//void printWindows() - debugging function that prints out the windows in the office
+/**
+ * @brief Print the windows
+ */
 void Office::printWindows() {
-    //cout << "The office is " << type << endl;
     int occupied = 0;
-    //cout << "Size of the Office is " << office->getSize() << endl;
     for (int i = 0; i < office->getSize(); i++) {
-        //cout << "Window " << i;
         if (office->get(i)->isOccupied()) {
-            //cout << " has a Student" << endl;
             occupied++;
         }
-        //else cout << " is sitting on their ass playing with their dicks" << endl;
     }
-    //cout << occupied << " Windows are currently occupied" << endl;
-    //cout << "---------------------------------------------------------" << endl;
 }
 
-/*
-void attendStudent() - simulates when a student goes to the window to be attended; it increments occupWindows, and adds the current wait of 
-student to totalWait. It then checks updates longestWait if applicable. Then it iterates through the office DBL of windows to call setStudent() to
-add the student to a window
-*/
+/**
+ * @brief Attend to a student
+ */
 void Office::attendStudent() {
     if (occupWindows == maxWindows) return;
     occupWindows++;
@@ -118,10 +84,10 @@ void Office::attendStudent() {
     }
 }
 
-/*
-void lineUp(Customer *student) - takes a student parameter and simulates when a student lines up in the back of the line; it calls attendStudent() 
-if any windows are open and increments numStudents
-*/
+/**
+ * @brief Line up a student
+ * @param student The student to be lined up
+ */
 void Office::lineUp(Customer *student) {
     line->add(student);
     if (occupWindows < maxWindows) {
@@ -130,12 +96,10 @@ void Office::lineUp(Customer *student) {
     numStudents++;
 }
 
-/*
-void passTime() - Simulates a single min passing in the Office. Iterates through the Windows in *office, and if there are any students in line, it
-pops the student and adds it to that window. If the window is finished with the student, then it adds that student to the finished ListQ and sets 
-Window.finished to false 
-*/
-void Office::passTime() {
+/**
+ * @brief Pass the time
+ */
+void Office::passMin()  {
     for (int i = 0; i < office->getSize(); i++) {
         office->get(i)->passTime();
         if (!office->get(i)->isOccupied()) {
@@ -150,23 +114,26 @@ void Office::passTime() {
     }
 }
 
-/*
-double getMeanWait() - returns totalWait / numStudents
-*/
+/**
+ * @brief Get the Mean Wait time
+ * @return double The mean wait time
+ */
 double Office::getMeanWait() {
     return totalWait / numStudents;
 }
 
-/*
-int getLongestWait() - returns longestWait
-*/
+/**
+ * @brief Get the Longest Wait time
+ * @return int The longest wait time
+ */
 int Office::getLongestWait() {
     return longestWait;
 }
 
-/*
-double getMeanIdle() - returns the average idle time for the office
-*/
+/**
+ * @brief Get the Mean Idle time
+ * @return double The mean idle time
+ */
 double Office::getMeanIdle() {
     double total = 0;
     for (int i = 0; i < office->getSize(); i++) {
@@ -175,9 +142,10 @@ double Office::getMeanIdle() {
     return total / maxWindows;
 }
 
-/*
-int getLongestIdle() - returns the longest idle time for a single window for the office
-*/
+/**
+ * @brief Get the Longest Idle time
+ * @return int The longest idle time
+ */
 int Office::getLongestIdle() {
     double max = 0;
     for (int i = 0; i < office->getSize(); i++) {
@@ -188,9 +156,10 @@ int Office::getLongestIdle() {
     return max;
 }
 
-/*
-int getIdleOver5() - returns the amount of windows that have been idle over 5 min
-*/
+/**
+ * @brief Get the Idle Over5 count
+ * @return int The count of idle over 5
+ */
 int Office::getIdleOver5() {
     int idleOver5 = 0;
     for (int i = 0; i < office->getSize(); i++) {

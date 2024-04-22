@@ -1,35 +1,13 @@
-/*
-
-CPP File for Window that models a single window in one of the offices
-
-
-Functions:
-Window(char type) - constructor that takes a char type as parameter and sets it to this->type; also initializes other variables
-~Window(); - deconstructor
-
-void setStudent(Customer *student); - sets the parameter student as the curStudent variable, calls Customer.attend(), sets occupied as true, and sets
-timeNeeded as the requisite time from the Student
-
-Customer* getStudent(); - returns the curStudent
-int getIdle(); - accessor for idle; time spent idle
-bool isOccupied(); - whether the window is currently occupied
-
-void finish(); - simulates a window finishing a student; sets occupied to false, currTime to 0, and finished to true
-
-void passTime(); - simulates one minute passing; if the window is not occupied, iterates idle, otherwise iterates currTime, 
-calls currStudent.passTime(), and if the currTime >= timeNeeded then it calls finish()
-*/
-
-#include <cstdlib>
 #include <iostream>
 #include "Window.h"
 #include "Customer.h"
 
 using namespace std;
 
-/*
-Window(char type) - constructor that takes a char type as parameter and sets it to this->type; also initializes other variables
-*/
+/**
+ * @brief Constructor for the Window class
+ * @param type The type of the window
+ */
 Window::Window(char type) {
     this->type = type;
     this->students = 0;
@@ -40,14 +18,17 @@ Window::Window(char type) {
     finished = false;
 }
 
+/**
+ * @brief Destructor for the Window class
+ */
 Window::~Window() {
     delete curStudent;
 }
 
-/*
-void setStudent(Customer *student) - sets the parameter student as the curStudent variable, calls Customer.attend(), sets occupied as true, and sets
-timeNeeded as the requisite time from the Student
-*/
+/**
+ * @brief Sets the current student for the window
+ * @param student The student to be set
+ */
 void Window::setStudent(Customer *student) {
     this->curStudent = student;
     curStudent->attend();
@@ -65,21 +46,33 @@ void Window::setStudent(Customer *student) {
     occupied = true;
 }
 
+/**
+ * @brief Returns the idle time of the window
+ * @return The idle time
+ */
 int Window::getIdle() {
     return idle;
 }
 
+/**
+ * @brief Returns the current student of the window
+ * @return The current student
+ */
 Customer* Window::getStudent() {
     return curStudent;
 }
 
+/**
+ * @brief Checks if the window is occupied
+ * @return True if the window is occupied, false otherwise
+ */
 bool Window::isOccupied() {
     return occupied;
 }
 
-/*
-void finish() - simulates a window finishing a student; sets occupied to false, currTime to 0, and finished to true
-*/
+/**
+ * @brief Simulates the window finishing a student
+ */
 void Window::finish() {
     curStudent->finish();
     occupied = false;
@@ -87,21 +80,18 @@ void Window::finish() {
     finished = true;
 }
 
-/*
-void passTime(); - simulates one minute passing; if the window is not occupied, iterates idle, otherwise iterates currTime, 
-calls currStudent.passTime(), and if the currTime >= timeNeeded then it calls finish()
-*/
+/**
+ * @brief Simulates one minute passing in the window
+ */
 void Window::passTime() {
     // is idle
     if (!occupied) {
         idle++;
-        //cout << "Window at Office " << type << " is currently idle" << endl;
     }
-    // occupied
+        // occupied
     else {
         curStudent->passTime();
-        //cout << "Current Time at Window = " << currTime << endl;
-        //cout << "Time Needed at Window = " << timeNeeded << endl;
+
         currTime++;
         if (currTime >= timeNeeded) finish();
     }

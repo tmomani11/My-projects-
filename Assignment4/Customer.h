@@ -1,45 +1,3 @@
-/*
-
-
-Header File for Customer
-
-Functions:
-    Customer(int finAid, int regist, int cash, ListQueue<char> *order, int num) - Constructor that takes an intial int for the time needed at the
-    Financial Aid, Registrar, and Cashier office, a ListQueue of the order of offices to visit, and a int num that represents which student it is
-    ~Customer() - deconstructor
-
-    int getCurWait() - accessor for current wait
-    int getTotalWait() - accessor for total time waiting
-    int getFinAid() - acessor for time needed at Fin Aid
-    int getRegist() - acessor for time needed at registrar
-    int getCash() - accessor for time needed at cashier
-    char getDest() - acessor for destination
-    int getAttendTime() - accessor for current time spent at office
-    ListQueue<char>*& getOrder() - acessor for the order of offices
-
-    bool isWaiting() - check if the student is currently waiting
-    void attend() - simulates the student being attended by an office; sets waiting to false
-    void finish() - simulates a student finishing at an office; adds the current wait to total wait, sets current wait to 0, pops the front value
-    off order, sets attendTime to 0, and sets waiting to true
-    void passTime() - simulates one min passed; if the student is waiting then it iterates currWait; if the student is being attended it iterates 
-    attendTime
-
-Variables:
-    int num - numerical identifier for student
-
-    int finAid - time needed at finAid office
-    int regist - time needed at registrar office
-    int cash - time needed at cashier
-    char office - current office
-
-    int attendTime - time spend at current window being helped
-    int curWait - time spend waiting at current office
-    int totalWait - total time spent waiting
-    bool waiting - if student is waiting or not
-
-    ListQueue<char> *order - order of offices to visit
-*/
-
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
 
@@ -49,38 +7,114 @@ Variables:
 
 using namespace std;
 
+/**
+ * @class Customer
+ * @brief A class that represents a customer.
+ */
 class Customer {
 public:
+    /**
+     * @brief Construct a new Customer object
+     * @param finAid The financial aid of the customer
+     * @param regist The registration of the customer
+     * @param cash The cash of the customer
+     * @param order The order of the customer
+     * @param num The number of the customer
+     */
     Customer(int finAid, int regist, int cash, ListQueue<char> *order, int num);
+
+    /**
+     * @brief Destroy the Customer object
+     */
     ~Customer();
 
+    /**
+     * @brief Get the Current Wait time
+     * @return int The current wait time
+     */
     int getCurWait();
+
+    /**
+     * @brief Get the Total Wait time
+     * @return int The total wait time
+     */
     int getTotalWait();
+
+    /**
+     * @brief Get the Financial Aid
+     * @return int The financial aid
+     */
     int getFinAid();
+
+    /**
+     * @brief Get the Registration
+     * @return int The registration
+     */
     int getRegist();
+
+    /**
+     * @brief Get the Cash
+     * @return int The cash
+     */
     int getCash();
+
+    /**
+     * @brief Get the Destination
+     * @return char The destination
+     */
     char getDest();
+
+    /**
+     * @brief Get the Attend Time
+     * @return int The attend time
+     */
     int getAttendTime();
+
+    /**
+     * @brief Get the Order
+     * @return ListQueue<char>*& The order
+     */
     ListQueue<char>*& getOrder();
 
+    /**
+     * @brief Check if the customer is waiting
+     * @return bool True if the customer is waiting, false otherwise
+     */
     bool isWaiting();
+
+    /**
+     * @brief Attend to the customer
+     */
     void attend();
+
+    /**
+     * @brief Finish the customer
+     */
     void finish();
+
+    /**
+     * @brief Pass the time
+     */
     void passTime();
-    
-    int num;
+
+    /**
+     * @brief Get the number of the customer
+     * @return int The number of the customer
+     */
+    int getNum();
+int num;
 private:
-    int finAid;
-    int regist;
-    int cash;
-    char office;
+    int finAid; ///< The financial aid of the customer
+    int regist; ///< The registration of the customer
+    int cash; ///< The cash of the customer
+    char office; ///< The office of the customer
 
-    int attendTime;
-    int curWait;
-    int totalWait;
-    bool waiting;
+    int attendTime; ///< The attend time of the customer
+    int curWait; ///< The current wait time of the customer
+    int totalWait; ///< The total wait time of the customer
+    bool waiting; ///< The waiting status of the customer
 
-    ListQueue<char> *order;
+    ListQueue<char> *order; ///< The order of the customer
 };
 
 #endif

@@ -1,51 +1,3 @@
-/*
-
-
-Header File for Office that models an individual office in the service center
-
-
-Functions:
-Office(int size, char type)- Constructor that takes an int size representing the number of windows and a char type that is the type of office and 
-intializes other variables
-~Office() - Deconstructor
-
-void attendStudent() - simulates when a student goes to the window to be attended; it increments occupWindows, and adds the current wait of 
-student to totalWait. It then checks updates longestWait if applicable. Then it iterates through the office DBL of windows to call setStudent() to
-add the student to a window
-
-void passTime() - Simulates a single min passing in the Office. Iterates through the Windows in *office, and if there are any students in line, it
-pops the student and adds it to that window. If the window is finished with the student, then it adds that student to the finished ListQ and sets 
-Window.finished to false 
-
-void lineUp(Customer *student) - takes a student parameter and simulates when a student lines up in the back of the line; it calls attendStudent() 
-if any windows are open and increments numStudents
-
-double getMeanWait() - returns totalWait / numStudents
-int getLongestWait() - accessor for longestWait
-double getMeanIdle() - returns the average idle time for the office
-int getLongestIdle() - returns the longest idle time for a single window for the office
-int getIdleOver5() - returns the amount of windows that have been idle over 5 min
-
-DblList<Window*>*& getOffice() - returns a pointer to the current office
-ListQueue<Customer*>*& getFinished() - returns the finished ListQ which is the students that are finished at this office
-
-void printWindows() - debugging function that prints out the windows in the office
-void printFinishedList() - debugging function that prints out the finished ListQ
-
-Variables:
-char type - represents the type of office
-double totalIdle - total time all windows in office have been idle
-int maxWindows - num of windows in the office
-int occupWindows - num of windows occupied
-double totalWait - total time every student that has been attended has been waiting
-int numStudents - num of students that have been attended
-int longestWait - longest time a student has been waiting
-
-ListQueue<Customer*> *line - represents that line for the office
-ListQueue<Customer*> *finished - students that have finished
-DblList<Window*> *office - represents the office with a ListQ of Windows
-*/
-
 #ifndef OFFICE_H
 #define OFFICE_H
 
@@ -56,37 +8,110 @@ DblList<Window*> *office - represents the office with a ListQ of Windows
 
 using namespace std;
 
+/**
+ * @class Office
+ * @brief A class that represents an office.
+ */
 class Office {
 public:
+    /**
+     * @brief Construct a new Office object
+     * @param size The size of the office
+     * @param type The type of the office
+     */
     Office(int size, char type);
+
+    /**
+     * @brief Destroy the Office object
+     */
     ~Office();
+
+    /**
+     * @brief Attend to a student
+     */
     void attendStudent();
-    void passTime();
+
+    /**
+     * @brief Pass the time
+     */
+    void passMin();
+
+    /**
+     * @brief Line up a student
+     * @param student The student to be lined up
+     */
     void lineUp(Customer *student);
+
+    /**
+     * @brief Get the attending student
+     * @return Customer* The attending student
+     */
     Customer* getAttending();
+
+    /**
+     * @brief Get the Mean Wait time
+     * @return double The mean wait time
+     */
     double getMeanWait();
+
+    /**
+     * @brief Get the Longest Wait time
+     * @return int The longest wait time
+     */
     int getLongestWait();
+
+    /**
+     * @brief Get the Mean Idle time
+     * @return double The mean idle time
+     */
     double getMeanIdle();
+
+    /**
+     * @brief Get the Longest Idle time
+     * @return int The longest idle time
+     */
     int getLongestIdle();
+
+    /**
+     * @brief Get the Idle Over5 count
+     * @return int The count of idle over 5
+     */
     int getIdleOver5();
+
+    /**
+     * @brief Get the Office
+     * @return DblList<Window*>*& The office
+     */
     DblList<Window*>*& getOffice();
+
+    /**
+     * @brief Get the Finished
+     * @return ListQueue<Customer*>*& The finished queue
+     */
     ListQueue<Customer*>*& getFinished();
 
+    /**
+     * @brief Print the windows
+     */
     void printWindows();
-    void printFinishedList();
-    
-private:
-    char type;
-    double totalIdle;
-    int maxWindows;
-    int occupWindows;
-    double totalWait;
-    int numStudents;
-    int longestWait;
 
-    ListQueue<Customer*> *line;
-    ListQueue<Customer*> *finished;
-    DblList<Window*> *office;
+    /**
+     * @brief Print the finished list
+     */
+    void printFinishedList();
+
+private:
+    char type; ///< The type of the office
+    double totalIdle; ///< The total idle time
+    int maxWindows; ///< The maximum number of windows
+    int occupWindows; ///< The number of occupied windows
+    double totalWait; ///< The total wait time
+    int numStudents; ///< The number of students
+    int longestWait; ///< The longest wait time
+
+    ListQueue<Customer*> *line; ///< The line of customers
+    ListQueue<Customer*> *finished; ///< The finished queue
+    DblList<Window*> *office; ///< The office
 };
 
 #endif
