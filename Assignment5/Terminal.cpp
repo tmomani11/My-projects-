@@ -15,7 +15,7 @@ Terminal::~Terminal(){
 DataBase database;
 
 bool MainMenu(){
-  string Selection;
+  int Selection;
   bool ChoiceMade = false;
 cout << " 1 = Print all students and their information" <<endl;
 cout << " 2 = Print all faculty and their information" <<endl;
@@ -30,53 +30,44 @@ cout << " 10 = Remove an advisee from a faculty member given the ids" <<endl;
 cout << " 11 = Exit" << endl;
 cin >> Selection;
 
-  if (Selection == "1"){
-    database.StudentPrint();
-    return true;
-  }
-  if (Selection == "2"){
-    database.FacultyPrint();
-    return true;
-  }
-  if (Selection == "3"){
-    database.PrintaStudent();
-    return true;
-  }
-  if (Selection == "4"){
-    database.PrintaFaculty();
-    return true;
-  }
-  if (Selection == "5"){
-    database.StudentInput();
-    return true;
-  }
-  if (Selection == "6"){
-    database.DeleteaStudent();
-    return true;
-  }
-  if (Selection == "7"){
-    database.FacultyInput();
-    return true;
-  }
-  if (Selection == "8"){
-    database.DeleteaFaculty();
-    return true;
-  }
-  if (Selection == "9"){
-    database.ChangeAdvisor();
-    return true;
-  }
-  if (Selection == "10"){
-    database.RemoveAdvisee();
-    return true;
-  }
-  if (Selection == "11"){
-    database.WriteFile();
-    return false;
-  }
-  else{
-    cout << "Invaid input, please enter a valid number." << endl;
+    switch (Selection) {
+        case 1:
+            database.StudentPrint();
+            break;
+        case 2:
+            database.FacultyPrint();
+            break;
+        case 3:
+            database.PrintaStudent();
+            break;
+        case 4:
+            database.PrintaFaculty();
+            break;
+        case 5:
+            database.StudentInput();
+            break;
+        case 6:
+            database.DeleteaStudent();
+            break;
+        case 7:
+            database.FacultyInput();
+            break;
+        case 8:
+            database.DeleteaFaculty();
+            break;
+        case 9:
+            database.ChangeAdvisor();
+            break;
+        case 10:
+            database.RemoveAdvisee();
+            break;
+        case 11:
+            database.WriteFile();
+            return false;
+        default:
+            cout << "Invalid input, please enter a valid number." << endl;
+    }
     return true;
 
-  }
+
 }

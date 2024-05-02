@@ -1,9 +1,45 @@
 #ifndef BST_H
 #define BST_H
 
-#include "TreeNode.h"
 #include <fstream>
 #include <iostream>
+
+template <typename T>
+class TreeNode{
+public:
+    TreeNode(T d);
+    virtual ~TreeNode();
+    T getData();
+    T m_data;
+    template <typename S>
+    friend class BST;
+
+private:
+    TreeNode<T>* m_left;
+    TreeNode<T>* m_right;
+};
+
+template <typename T>
+TreeNode<T>::TreeNode(T d){
+    m_data = d;
+    m_left = nullptr;
+    m_right = nullptr;
+}
+
+template <typename T>
+TreeNode<T>::~TreeNode(){
+    if(m_left != nullptr){
+        delete m_left;
+    }
+    if(m_right != nullptr){
+        delete m_right;
+    }
+}
+
+template <typename T>
+T TreeNode<T>::getData(){
+    return m_data;
+}
 
 template <typename T>
 class BST{
@@ -51,9 +87,7 @@ class BST{
 
 
 
-    // ***************************************************************** // 
-    // ****************** LECTURE  17 ********************************** // 
-    // ***************************************************************** //
+
 
    template <typename T>
         BST<T>::BST(){
@@ -243,9 +277,7 @@ void BST<T>::ReSortHelper(T* arr, int size) {
         }
     }
 
-    // ***************************************************************** // 
-    // ****************** LECTURE  18 ********************************** // 
-    // ***************************************************************** // 
+
 
     // INSERT RECURSIVETY 
     template <typename T>
@@ -337,9 +369,7 @@ T BST<T>::getHelper(T input, TreeNode<T>* node) {
         return m_root->m_data;
     }
 
-    // ***************************************************************** // 
-    // ****************** LECTURE  19 ********************************** // 
-    // ***************************************************************** //
+
 
     // HELPER METHODS 
     template <typename T>

@@ -3,7 +3,6 @@
 #include "Faculty.h"
 #include "Student.h"
 #include "Terminal.h"
-#include "TreeNode.h"
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -45,12 +44,18 @@ void DataBase::PrintaFaculty(){ //Prints one faculty member based on an inputed 
     cout << myFaculty << endl;
 }
 
-void DataBase::DeleteaStudent(){ //Deletes one student based on an inputed ID
-    int i;
+void DataBase::DeleteaStudent() { //Deletes one student based on an inputted ID
+    int i = 0 ;
     cout << "Enter Student ID #: ";
-    cin >> i;
+    cin  >> i;
     Student s = Student(i);
-    stree->remove(s);
+    if (stree->contains(s)) {
+        Student myStudent = stree->get(s);
+        cout << "Student " << myStudent.getStudentName() << " with ID #: " << i << " has been removed from the student database!" << endl;
+        stree->remove(s);
+    } else {
+        cout << "No student with ID #: " << i << " found in the database." << endl;
+    }
 }
 
 void DataBase::DeleteaFaculty(){ //Deletes one faculty member based on an inputed ID
@@ -121,12 +126,13 @@ void DataBase::StudentInput() { //creates a new student and places it in the tre
   int StudentAdvisor;
   cout << "Enter Student ID #: ";
   cin >> StudentID;
+  cin.ignore(1000, '\n');
   cout << "Enter Student Name: ";
-  cin >> StudentName;
+  getline(cin, StudentName) ;
   cout << "Enter Student Grade Level: ";
-  cin >> StudentLevel;
+  getline(cin, StudentLevel) ;
   cout << "Enter Student Major: ";
-  cin >> StudentMajor;
+  getline(cin, StudentMajor) ;
   cout << "Enter Student GPA: ";
   cin >> StudentGPA;
   cout << "Enter Student Advisor ID #: ";

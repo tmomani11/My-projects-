@@ -17,4 +17,4 @@ add_executable(Lazily_Balanced_Tree_main
         Student.h
         Terminal.cpp
         Terminal.h
-        TreeNode.h)
+)
