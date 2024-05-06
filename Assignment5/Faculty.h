@@ -30,11 +30,11 @@ friend std::ostream& operator<<(std::ostream &stream, const Faculty& f);
     // Destructor
     ~Faculty();
     private:
-      int m_FacultyID;
-      string m_FacultyName;
-      string m_FacultyLevel;
-      string m_FacultyDepartment;
-      BST<Student>* m_FacultyStudents;
+      int    FacultyID;
+      string FacultyName;
+      string FacultyLevel;
+      string FacultyDepartment;
+      BST<Student>* FacultyStudents;
 };
 
 #endif

@@ -44,7 +44,6 @@ T TreeNode<T>::getData(){
 template <typename T>
 class BST{
     public:
-				// lecture 17
         BST();
         virtual ~BST();
         bool iterContains(T d); 
@@ -52,7 +51,6 @@ class BST{
         void printInOrder(); // least to greatest 
         void writeInOrder(std::ostream& out) const;
         void printTreePostOrder(); // left tree then right tree then root 
-				// lecture 18
         void insert(T d);
         void ReSort(); //Resorts the students when the tree gets unbalanced
         void ReSortHelper(T* arr, int size); //Resorts the students based on the median value and then recurssively finds the median values of the left and right tree to build a more balanced BST
@@ -63,11 +61,9 @@ class BST{
         int MinDepth();
         T min(); // left most child 
         T median(); // will only work if tree is balanced 
-        // lecture 19
-        void remove (T d); 
+        void remove (T d);
          
     private: 
-				// lecture 17
         TreeNode<T>* m_root;
         int m_size;
         bool recContainsHelper(TreeNode<T>* n, T d); 
@@ -171,13 +167,7 @@ void BST<T>::ReSortHelper(T* arr, int size) {
     }
 
 
-    // how do we find whether or not a tree contains a key?
-        // navigate through the tree until we find it 
-        // well it's not linear and each node has a left and right child potentially so... 
 
-        // let's say we are at the root and we assume the root is not null
-        // how do we know if the tree contains "d"?
-        // let's try iteratively 
     template <typename T>
     bool BST<T>::iterContains(T d){
         if (m_root == NULL){ // tree is empty

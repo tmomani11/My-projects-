@@ -1,5 +1,4 @@
 #include "Student.h"
-#include "Terminal.h"
 #include <iostream>
 using namespace std;
 
