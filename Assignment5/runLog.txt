@@ -1,0 +1,15 @@
+All Students: 
+ID: 1
+Name: tyler
+Level: seniro
+Major: conmp scio
+GPA: 3.9
+Advisor: 1
+
+All Faculty: 
+ID: 1
+Name: jonh doe
+Level: seniro
+Department: comp sic
+Students:
+

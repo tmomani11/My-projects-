@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.28)
-project(Lazily_Balanced_Tree_main)
+project(Assignment5)
 
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
-add_executable(Lazily_Balanced_Tree_main
+add_executable(Assignment5
         BST.h
         DataBase.cpp
         DataBase.h
@@ -15,6 +15,6 @@ add_executable(Lazily_Balanced_Tree_main
         main.cpp
         Student.cpp
         Student.h
-        Terminal.cpp
-        Terminal.h
+        Menu.cpp
+        Menu.h
 )

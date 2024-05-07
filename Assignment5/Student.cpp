@@ -1,76 +1,89 @@
 #include "Student.h"
 #include <iostream>
+
 using namespace std;
 
+// Default constructor: Initializes a new student with default values
 Student::Student() {
-  m_StudentID = 0;
-  m_StudentName = "John Doe";
-  m_StudentLevel = "Freshman";
-  m_StudentMajor = "Film Production";
-  m_StudentGPA = 0;
-  m_StudentAdvisor = 0;
+    StudentID = 0;
+    StudentName = "";
+    StudentLevel = "";
+    StudentMajor = "";
+    StudentGPA = 0;
+    StudentAdvisor = 0;
 }
 
+// Overloaded constructor: Initializes a new student with a given ID and default values for other attributes
 Student::Student(int i) {
-  m_StudentID = i;
-  m_StudentName = "John Doe";
-  m_StudentLevel = "Freshman";
-  m_StudentMajor = "Film Production";
-  m_StudentGPA = 0;
-  m_StudentAdvisor = 0;
+    StudentID = i;
+    StudentName = "";
+    StudentLevel = "";
+    StudentMajor = "";
+    StudentGPA = 0;
+    StudentAdvisor = 0;
 }
 
+// Overloaded constructor: Initializes a new student with given values for all attributes
 Student::Student(int StudentID, string StudentName, string StudentLevel,
                  string StudentMajor, double StudentGPA, int StudentAdvisor) {
-  m_StudentID = StudentID;
-  m_StudentName = StudentName;
-  m_StudentLevel = StudentLevel;
-  m_StudentMajor = StudentMajor;
-  m_StudentGPA = StudentGPA;
-  m_StudentAdvisor = StudentAdvisor;
+    this->StudentID = StudentID;
+    this->StudentName = StudentName;
+    this->StudentLevel = StudentLevel;
+    this->StudentMajor = StudentMajor;
+    this->StudentGPA = StudentGPA;
+    this->StudentAdvisor = StudentAdvisor;
 }
 
+// Destructor: Currently empty because there are no dynamically allocated attributes
 Student::~Student() {}
 
-int Student::getStudentID() const { return m_StudentID; }
+// Getter for student ID
+int Student::getStudentID() const { return StudentID; }
 
-string Student::getStudentName() const { return m_StudentName; }
+// Getter for student name
+string Student::getStudentName() const { return StudentName; }
 
-string Student::getStudentLevel() const { return m_StudentLevel; }
+// Getter for student level
+string Student::getStudentLevel() const { return StudentLevel; }
 
-string Student::getStudentMajor() const { return m_StudentMajor; }
+// Getter for student major
+string Student::getStudentMajor() const { return StudentMajor; }
 
-double Student::getStudentGPA() const { return m_StudentGPA; }
+// Getter for student GPA
+double Student::getStudentGPA() const { return StudentGPA; }
 
-int Student::getStudentAdvisor() const { return m_StudentAdvisor; }
+// Getter for student advisor
+int Student::getStudentAdvisor() const { return StudentAdvisor; }
 
-void Student::setAdvisor(int i){
-    m_StudentAdvisor = i;
+// Setter for student advisor
+void Student::setAdvisor(int i) {
+    StudentAdvisor = i;
 }
 
-bool Student::operator<(const Student& s) const {
-    return (m_StudentID < s.m_StudentID);
+// Overloaded comparison operators for comparing students based on their IDs
+bool Student::operator<(const Student &s) const {
+    return (StudentID < s.StudentID);
 }
 
-bool Student::operator>(const Student& s) const {
-    return (m_StudentID > s.m_StudentID);
+bool Student::operator>(const Student &s) const {
+    return (StudentID > s.StudentID);
 }
 
-bool Student::operator==(const Student& s) const {
-    return (m_StudentID == s.m_StudentID);
+bool Student::operator==(const Student &s) const {
+    return (StudentID == s.StudentID);
 }
 
-bool Student::operator!=(const Student& s) const {
-    return (m_StudentID != s.m_StudentID);
+bool Student::operator!=(const Student &s) const {
+    return (StudentID != s.StudentID);
 }
 
-
-ostream &operator<<(ostream &stream, const Student& s) {
-  stream << "ID: " << s.getStudentID() << endl;
-  stream << "Name: " << s.getStudentName() << endl;
-  stream << "Level: " << s.getStudentLevel() << endl;
-  stream << "Major: " << s.getStudentMajor() << endl;
-  stream << "GPA: " << s.getStudentGPA() << endl;
-  stream << "Advisor: " << s.getStudentAdvisor() << endl;
-  return stream;
+// Overloaded stream insertion operator for printing a student
+ostream &operator<<(ostream &stream, const Student &s) {
+    stream << "ID: " << s.getStudentID() << endl;
+    stream << "Name: " << s.getStudentName() << endl;
+    stream << "Level: " << s.getStudentLevel() << endl;
+    stream << "Major: " << s.getStudentMajor() << endl;
+    stream << "GPA: " << s.getStudentGPA() << endl;
+    stream << "Advisor: " << s.getStudentAdvisor() << endl;
+    return stream;
 }

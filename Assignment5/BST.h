@@ -50,15 +50,14 @@ class BST{
         bool contains(T d); // recursive version that uses recContainsHelper
         void printInOrder(); // least to greatest 
         void writeInOrder(std::ostream& out) const;
+        bool isEmpty() const;
         void printTreePostOrder(); // left tree then right tree then root 
         void insert(T d);
         void ReSort(); //Resorts the students when the tree gets unbalanced
-        void ReSortHelper(T* arr, int size); //Resorts the students based on the median value and then recurssively finds the median values of the left and right tree to build a more balanced BST
+        void ReSortHelper(T* arr, int size);
         int size();
         T get(T input);
         T max(); // right most child
-        int MaxDepth();
-        int MinDepth();
         T min(); // left most child 
         T median(); // will only work if tree is balanced 
         void remove (T d);
@@ -70,22 +69,22 @@ class BST{
         void printIOHelper(TreeNode<T>* n);
         void writeIOHelper(std::ostream& out, TreeNode<T>* n) const;
         void printTreePostOrderHelper(TreeNode<T>* subTreeRoot);
-				// lecture 18
         void insertHelper(TreeNode<T>*& subTreeRoot, T& d);
         T getHelper(T input, TreeNode<T>* node);
         T getMaxHelper(TreeNode<T>* n);
         T getMinHelper(TreeNode<T>* n);
-            // lecture 19 
         void findTarget(T key, TreeNode<T>*& target, TreeNode<T>*& parent);
         TreeNode<T>* getSuccessor (TreeNode<T>* rightChild);
      
 };
 
+template<typename T>
+bool BST<T>::isEmpty() const {
+    return m_root == nullptr;
+}
 
 
-
-
-   template <typename T>
+template <typename T>
         BST<T>::BST(){
         m_root = NULL;
         m_size = 0;
@@ -112,59 +111,75 @@ class BST{
         return MaxDepth(node->m_right, depth + 1);
     }
 
-    template <typename T>
-    void BST<T>::ReSort() {
-    if (MaxDepth() > 1.5 * MinDepth() || MinDepth() > 1.5 * MaxDepth()) {
-        T* arr = new T[size()];
-        while (size() != 0) {
-            arr[size() - 1] = min();
-            remove(arr[size() - 1]);
-        }
-        int length = size();
-        while (size() < length/2) {
-            T median = arr[size() / 2 - 1];
-            insert(median);
-            T* left = new T[length / 2];
-            T* right = new T[(length - 1) / 2];
-            for (int i = 0; i < length / 2; i++) {
-                left[i] = arr[i];
-            }
-            for (int i = length / 2 + 1; i < length; i++) {
-                right[i - length / 2 - 1] = arr[i];
-            }
-            BST<T> leftTree;
-            leftTree.ReSortHelper(left, length / 2);
-            BST<T> rightTree;
-            rightTree.ReSortHelper(right, (length - 1) / 2);
-            delete[] left;
-            delete[] right;
-        }
-        delete[] arr;
+//    template <typename T>
+//    void BST<T>::ReSort() {
+//    if (MaxDepth() > 1.5 * MinDepth() || MinDepth() > 1.5 * MaxDepth()) {
+//        T* arr = new T[size()];
+//        while (size() != 0) {
+//            arr[size() - 1] = min();
+//            remove(arr[size() - 1]);
+//        }
+//        int length = size();
+//        while (size() < length/2) {
+//            T median = arr[size() / 2 - 1];
+//            insert(median);
+//            T* left = new T[length / 2];
+//            T* right = new T[(length - 1) / 2];
+//            for (int i = 0; i < length / 2; i++) {
+//                left[i] = arr[i];
+//            }
+//            for (int i = length / 2 + 1; i < length; i++) {
+//                right[i - length / 2 - 1] = arr[i];
+//            }
+//            BST<T> leftTree;
+//            leftTree.ReSortHelper(left, length / 2);
+//            BST<T> rightTree;
+//            rightTree.ReSortHelper(right, (length - 1) / 2);
+//            delete[] left;
+//            delete[] right;
+//        }
+//        delete[] arr;
+//    }
+//}
+template <typename T>
+void BST<T>::ReSort() {
+    if (MaxDepth(m_root, 0) > 1.5 * MinDepth(m_root, 0) || MinDepth(m_root, 0) > 1.5 * MaxDepth(m_root, 0)) {
+        int length = m_size;
+        T* sorted_elements = new T[length];
+
+        int index = 0;
+        collectInOrder(m_root, sorted_elements, index);
+
+        clearTree(m_root);
+        m_root = nullptr;
+        m_size = 0;
+
+        ReSortHelper(sorted_elements, 0, length);
+
+        delete[] sorted_elements;
     }
 }
-
 template <typename T>
-void BST<T>::ReSortHelper(T* arr, int size) {
-    if (size == 0) {
-        return;
-    }
-    int median = size / 2 - 1;
+void ReSortHelper(T* arr, int start, int end) {
+    if (start >= end) return;
+
+    int median = start + (end - start) / 2;
     insert(arr[median]);
-    T* left = new T[size / 2];
-    T* right = new T[(size - 1) / 2];
-    for (int i = 0; i < size / 2; i++) {
-        left[i] = arr[i];
-        }
-    for (int i = size / 2 + 1; i < size; i++) {
-        right[i - size / 2 - 1] = arr[i];
-    }
-    BST<T> leftTree;
-    leftTree.ReSortHelper(left, size / 2);
-    BST<T> rightTree;
-    rightTree.ReSortHelper(right, (size - 1) / 2);
-    delete[] left;
-    delete[] right;
-    }
+
+    ReSortHelper(arr, start, median);
+    ReSortHelper(arr, median + 1, end);
+}
+template <typename T>
+void clearTree(TreeNode<T>*& node) {
+    if (node == nullptr) return;
+
+    clearTree(node->m_left);
+    clearTree(node->m_right);
+
+    delete node;
+    node = nullptr;
+}
+
 
 
 
