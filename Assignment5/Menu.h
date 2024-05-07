@@ -1,5 +1,5 @@
-#ifndef Terminal_H
-#define Terminal_H
+#ifndef Menu_H
+#define Menu_H
 #include <iostream>
 using namespace std;
 class Menu{
