@@ -1,6 +1,3 @@
-#include "BST.h"
-#include "Student.h"
-#include "Faculty.h"
 #include "Menu.h"
 #include "DataBase.h"
 #include <iostream>
