@@ -4,75 +4,90 @@
 #include "BST.h"
 using namespace std;
 
+// Default constructor: Initializes a new faculty with default values
 Faculty::Faculty(){
-    m_FacultyID = 0;
-    m_FacultyName = "John Doe";
-    m_FacultyLevel = "Freshman";
-    m_FacultyDepartment = "Film Production";
-    m_FacultyStudents = new BST<Student>();
+    FacultyID         = 0;
+    FacultyName       = "";
+    FacultyLevel      = "";
+    FacultyDepartment = "";
+    FacultyStudents   = new BST<Student>();
 }
 
+// Overloaded constructor: Initializes a new faculty with a given ID and default values for other attributes
 Faculty::Faculty(int i){
-    m_FacultyID = i;
-    m_FacultyName = "John Doe";
-    m_FacultyLevel = "Freshman";
-    m_FacultyDepartment = "Film Production";
-    m_FacultyStudents = new BST<Student>();
+    FacultyID         = i;
+    FacultyName       = "";
+    FacultyLevel      = "";
+    FacultyDepartment = "";
+    FacultyStudents   = new BST<Student>();
 }
 
+// Overloaded constructor: Initializes a new faculty with given values for all attributes
 Faculty::Faculty(int FacultyID, string FacultyName, string FacultyLevel, string FacultyDepartment){
-    m_FacultyID = FacultyID;
-    m_FacultyName = FacultyName;
-    m_FacultyLevel = FacultyLevel;
-    m_FacultyDepartment = FacultyDepartment;
-    m_FacultyStudents = new BST<Student>();
+    this->FacultyID    = FacultyID;
+    this->FacultyName  = FacultyName;
+    this->FacultyLevel = FacultyLevel;
+    this->FacultyDepartment = FacultyDepartment;
+    FacultyStudents = new BST<Student>();
 }
 
+// Destructor: Currently empty because the BST<Student> is not dynamically allocated
 Faculty::~Faculty(){
 }
 
+// Getter for faculty ID
 int Faculty::getFacultyID() const{
-  return m_FacultyID;
+    return FacultyID;
 }
 
+// Getter for faculty name
 string Faculty::getFacultyName() const{
-  return m_FacultyName;
+    return FacultyName;
 }
 
+// Getter for faculty level
 string Faculty::getFacultyLevel() const{
-  return m_FacultyLevel;
+    return FacultyLevel;
 }
 
+// Getter for faculty department
 string Faculty::getFacultyDepartment() const{
-  return m_FacultyDepartment;
+    return FacultyDepartment;
 }
 
+// Prints all students of this faculty
 void Faculty::PrintFacultyStudents() const{
-    m_FacultyStudents->printInOrder();
+    FacultyStudents->printInOrder();
 }
 
+// Adds a student to this faculty's list of students
 void Faculty::AddStudent(Student S) const{
-    m_FacultyStudents->insert(S);
+    FacultyStudents->insert(S);
 }
 
+// Removes a student from this faculty's list of students
 void Faculty::RemoveStudent(Student S) const{
-    m_FacultyStudents->remove(S);
+    FacultyStudents->remove(S);
 }
 
-bool Faculty::operator!=(Faculty &s) const { return (m_FacultyID != s.m_FacultyID); }
+// Overloaded comparison operators for comparing faculties based on their IDs
+bool Faculty::operator!=(Faculty &s) const { return (FacultyID != s.FacultyID); }
+bool Faculty::operator<(Faculty &s) const { return (FacultyID < s.FacultyID); }
+bool Faculty::operator>(Faculty &s) const { return (FacultyID > s.FacultyID); }
+bool Faculty::operator==(Faculty &s) const { return (FacultyID == s.FacultyID); }
 
-bool Faculty::operator<(Faculty &s) const { return (m_FacultyID < s.m_FacultyID); }
+// Getter for the list of students of this faculty
+BST<Student>* Faculty::getFacultyStudents() const {
+    return FacultyStudents;
+}
 
-bool Faculty::operator>(Faculty &s) const { return (m_FacultyID > s.m_FacultyID); }
-
-bool Faculty::operator==(Faculty &s) const { return (m_FacultyID == s.m_FacultyID); }
-
+// Overloaded stream insertion operator for printing a faculty
 ostream &operator<<(ostream &stream, const Faculty& f) {
-  stream << "ID: " << f.getFacultyID() << endl;
-  stream << "Name: " << f.getFacultyName() << endl;
-  stream << "Level: " << f.getFacultyLevel() << endl;
-  stream << "Department: " << f.getFacultyDepartment() << endl;
-  stream << "Students:" << endl;
-  f.PrintFacultyStudents();
-  return stream;
+    stream << "ID: " << f.getFacultyID() << endl;
+    stream << "Name: " << f.getFacultyName() << endl;
+    stream << "Level: " << f.getFacultyLevel() << endl;
+    stream << "Department: " << f.getFacultyDepartment() << endl;
+    stream << "Students:" << endl;
+    f.PrintFacultyStudents();
+    return stream;
 }

@@ -5,36 +5,69 @@
 #include "BST.h"
 using namespace std;
 
+// The Faculty class represents a faculty member in a university.
 class Faculty{
-    public:
-int getFacultyID() const;
-string getFacultyName() const;
-string getFacultyLevel() const;
-string getFacultyDepartment() const;
-void RemoveStudent(Student S) const;
-void PrintFacultyStudents() const;
-bool operator!=(Faculty &s) const;
-bool operator<(Faculty &s) const;
-bool operator>(Faculty &s) const;
-bool operator==(Faculty &s) const;
-void AddStudent(Student S) const;
-    // Default constructor
+public:
+    // Getter for faculty ID
+    int getFacultyID() const;
+
+    // Getter for faculty name
+    string getFacultyName() const;
+
+    // Getter for faculty level
+    string getFacultyLevel() const;
+
+    // Getter for faculty department
+    string getFacultyDepartment() const;
+
+    // Removes a student from this faculty's list of students
+    void RemoveStudent(Student S) const;
+
+    // Prints all students of this faculty
+    void PrintFacultyStudents() const;
+
+    // Overloaded comparison operators for comparing faculties based on their IDs
+    bool operator!=(Faculty &s) const;
+    bool operator<(Faculty &s) const;
+    bool operator>(Faculty &s) const;
+    bool operator==(Faculty &s) const;
+
+    // Adds a student to this faculty's list of students
+    void AddStudent(Student S) const;
+
+    // Getter for the list of students of this faculty
+    BST<Student>* getFacultyStudents() const;
+
+    // Default constructor: Initializes a new faculty with default values
     Faculty();
+
+    // Overloaded constructor: Initializes a new faculty with a given ID and default values for other attributes
     Faculty(int i);
-    
-    // Full constructor
+
+    // Full constructor: Initializes a new faculty with given values for all attributes
     Faculty(int FacultyID, string FacultyName, string FacultyLevel, string FacultyDepartment);
 
-friend std::ostream& operator<<(std::ostream &stream, const Faculty& f);
+    // Overloaded stream insertion operator for printing a faculty
+    friend std::ostream& operator<<(std::ostream &stream, const Faculty& f);
 
-    // Destructor
+    // Destructor: Currently empty because the BST<Student> is not dynamically allocated
     ~Faculty();
-    private:
-      int m_FacultyID;
-      string m_FacultyName;
-      string m_FacultyLevel;
-      string m_FacultyDepartment;
-      BST<Student>* m_FacultyStudents;
+
+private:
+    // Faculty ID
+    int    FacultyID;
+
+    // Faculty name
+    string FacultyName;
+
+    // Faculty level
+    string FacultyLevel;
+
+    // Faculty department
+    string FacultyDepartment;
+
+    // Binary search tree of students of this faculty
+    BST<Student>* FacultyStudents;
 };
 
 #endif

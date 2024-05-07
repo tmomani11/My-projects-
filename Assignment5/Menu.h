@@ -2,10 +2,10 @@
 #define Terminal_H
 #include <iostream>
 using namespace std;
-class Terminal{
+class Menu{
     public:
-        Terminal();
-        ~Terminal();
+        Menu();
+        ~Menu();
 };
 bool MainMenu();
 

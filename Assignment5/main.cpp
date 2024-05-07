@@ -1,16 +1,10 @@
-#include "BST.h"
-#include "Student.h"
-#include "Faculty.h"
-#include "Terminal.h"
-#include "DataBase.h"
-#include <iostream>
+#include "Menu.h"
 using namespace std;
 
 int main() {
-bool IsRunning = true;
-while (IsRunning == true){
-    IsRunning = MainMenu();
-}
-cout << "Program Ended" << endl;
+    bool running = true;
+    while(running){
+        running = MainMenu();
+    }
   return 0;
 }
