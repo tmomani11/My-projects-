@@ -33,7 +33,7 @@
 *.ipa
 
 # CLion files
-.idea/
+.idea/h
 *.iml
 
 # Other files
