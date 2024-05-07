@@ -1,0 +1,664 @@
+*=======================================*
+*              Level Number 0           *
+*=======================================*
+x m m g m 
+k k b c c 
+c c m k c 
+k c m m m 
+H w x m x 
+
+=======================================
+Level Number 0 
+Mario is at (2,5) 
+Power level 0 
+Mario warped 
+3 lives left 
+0 coins
+Mario's next move: RIGHT
+=======================================
+x m m g m 
+k k b c c 
+c c m k c 
+k c m m m 
+x H x m x 
+
+*=======================================*
+*              Level Number 1           *
+*=======================================*
+g b k g k 
+g k m c k 
+c c H x c 
+x c k c g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,3) 
+Power level 0 
+The position is empty 
+3 lives left 
+0 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k m c k 
+c c x H c 
+x c k c g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,4) 
+Power level 0 
+Mario collected a coin 
+3 lives left 
+1 coin
+Mario's next move: UP
+=======================================
+g b k g k 
+g k m c k 
+c c x x c 
+x c k H g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,3) 
+Power level 0 
+The position is empty 
+3 lives left 
+1 coin
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k m c k 
+c c x H c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (3,3) 
+Power level 0 
+The position is empty 
+3 lives left 
+1 coin
+Mario's next move: UP
+=======================================
+g b k g k 
+g k m c k 
+c c H x c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (3,2) 
+Power level 0 
+Mario ate a mushroom 
+3 lives left 
+1 coin
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k H c k 
+c c x x c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,2) 
+Power level 1 
+Mario collected a coin 
+3 lives left 
+2 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x H k 
+c c x x c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+2 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x x k 
+c c x H c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,4) 
+Power level 1 
+The position is empty 
+3 lives left 
+2 coins
+Mario's next move: UP
+=======================================
+g b k g k 
+g k x x k 
+c c x x c 
+x c k H g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+2 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+c c x H c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (3,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+2 coins
+Mario's next move: UP
+=======================================
+g b k g k 
+g k x x k 
+c c H x c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (3,2) 
+Power level 1 
+The position is empty 
+3 lives left 
+2 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k H x k 
+c c x x c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (3,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+2 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+c c H x c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+2 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+c c x H c 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (5,3) 
+Power level 1 
+Mario collected a coin 
+3 lives left 
+3 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+c c x x H 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+3 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+c c x H x 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (3,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+3 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+c c H x x 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (2,3) 
+Power level 1 
+Mario collected a coin 
+3 lives left 
+4 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+c H x x x 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (1,3) 
+Power level 1 
+Mario collected a coin 
+3 lives left 
+5 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x x k 
+H x x x x 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (1,4) 
+Power level 1 
+The position is empty 
+3 lives left 
+5 coins
+Mario's next move: UP
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+H c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (1,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+5 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+H x x x x 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (5,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+5 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+x x x x H 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (1,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+5 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+H x x x x 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (2,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+5 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x x k 
+x H x x x 
+x c k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (2,4) 
+Power level 1 
+Mario collected a coin 
+3 lives left 
+6 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x H k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (1,4) 
+Power level 1 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+H x k x g 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (5,4) 
+Power level 1 
+Mario fought a Goomba lost 
+3 lives left 
+6 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k x H 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (1,4) 
+Power level 1 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+H x k x x 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (5,4) 
+Power level 1 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: UP
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k x H 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (5,3) 
+Power level 1 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x x k 
+x x x x H 
+x x k x x 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (5,4) 
+Power level 1 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k x H 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,4) 
+Power level 1 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k H x 
+x c m m x 
+
+=======================================
+Level Number 1 
+Mario is at (4,5) 
+Power level 1 
+Mario ate a mushroom 
+3 lives left 
+6 coins
+Mario's next move: UP
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k x x 
+x c m H x 
+
+=======================================
+Level Number 1 
+Mario is at (4,4) 
+Power level 2 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k H x 
+x c m x x 
+
+=======================================
+Level Number 1 
+Mario is at (5,4) 
+Power level 2 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k x H 
+x c m x x 
+
+=======================================
+Level Number 1 
+Mario is at (1,4) 
+Power level 2 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+H x k x x 
+x c m x x 
+
+=======================================
+Level Number 1 
+Mario is at (1,5) 
+Power level 2 
+The position is empty 
+3 lives left 
+6 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k x x 
+H c m x x 
+
+=======================================
+Level Number 1 
+Mario is at (2,5) 
+Power level 2 
+Mario collected a coin 
+3 lives left 
+7 coins
+Mario's next move: UP
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x k x x 
+x H m x x 
+
+=======================================
+Level Number 1 
+Mario is at (2,4) 
+Power level 2 
+The position is empty 
+3 lives left 
+7 coins
+Mario's next move: RIGHT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x H k x x 
+x x m x x 
+
+=======================================
+Level Number 1 
+Mario is at (3,4) 
+Power level 2 
+Mario fought a Koopa lost 
+3 lives left 
+7 coins
+Mario's next move: LEFT
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x H x x 
+x x m x x 
+
+=======================================
+Level Number 1 
+Mario is at (2,4) 
+Power level 2 
+The position is empty 
+3 lives left 
+7 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x H x x x 
+x x m x x 
+
+=======================================
+Level Number 1 
+Mario is at (2,5) 
+Power level 2 
+The position is empty 
+3 lives left 
+7 coins
+Mario's next move: DOWN
+=======================================
+g b k g k 
+g k x x k 
+x x x x x 
+x x x x x 
+x H m x x 
+
+=======================================
+Level Number 1 
+Mario is at (2,1) 
+Power level 2 
+Mario fought the level boss won 
+3 lives left 
+7 coins
+Mario's next move: UP
+=======================================
+g H k g k 
+g k x x k 
+x x x x x 
+x x x x x 
+x x m x x 
+
+Mario Won! :). Total steps taken: 43
