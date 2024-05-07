@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// The DataBase class manages a database of students and faculty.
+// The DataBase class manages a database of students and faculty.//
 class DataBase {
 public:
     // Saves the current state of the database to a file.
