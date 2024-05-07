@@ -209,7 +209,8 @@ void DataBase::StudentInput() {
 
     Faculty f = Faculty(StudentAdvisor);
     if (!ftree->contains(f)) {
-        cout << "No faculty with ID #: " << StudentAdvisor << " found in the database. \n ABORTING"  <<endl;
+        cout << "\nNO FACULTY WITH ID #: " << StudentAdvisor << " FOUND IN DATABASE"
+                                                                ". \n ABORTING\n";
         return;
     }
 

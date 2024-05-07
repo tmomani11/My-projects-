@@ -6,5 +6,6 @@ int main() {
     while(running){
         running = MainMenu();
     }
+    cout << "Goodbye!" << endl;
   return 0;
 }
