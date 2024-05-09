@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(Assignment5
-        BST.h
+        LazyBST.h
         DataBase.cpp
         DataBase.h
         Faculty.cpp

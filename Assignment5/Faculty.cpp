@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Faculty.h"
 #include "Student.h"
-#include "BST.h"
+#include "LazyBST.h"
 using namespace std;
 
 // Default constructor: Initializes a new faculty with default values

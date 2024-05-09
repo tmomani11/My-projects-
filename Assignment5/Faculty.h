@@ -2,7 +2,7 @@
 #define Faculty_H
 #include <iostream>
 #include "Student.h"
-#include "BST.h"
+#include "LazyBST.h"
 using namespace std;
 
 // The Faculty class represents a faculty member in a university.

@@ -111,36 +111,6 @@ template <typename T>
         return MaxDepth(node->m_right, depth + 1);
     }
 
-//    template <typename T>
-//    void BST<T>::ReSort() {
-//    if (MaxDepth() > 1.5 * MinDepth() || MinDepth() > 1.5 * MaxDepth()) {
-//        T* arr = new T[size()];
-//        while (size() != 0) {
-//            arr[size() - 1] = min();
-//            remove(arr[size() - 1]);
-//        }
-//        int length = size();
-//        while (size() < length/2) {
-//            T median = arr[size() / 2 - 1];
-//            insert(median);
-//            T* left = new T[length / 2];
-//            T* right = new T[(length - 1) / 2];
-//            for (int i = 0; i < length / 2; i++) {
-//                left[i] = arr[i];
-//            }
-//            for (int i = length / 2 + 1; i < length; i++) {
-//                right[i - length / 2 - 1] = arr[i];
-//            }
-//            BST<T> leftTree;
-//            leftTree.ReSortHelper(left, length / 2);
-//            BST<T> rightTree;
-//            rightTree.ReSortHelper(right, (length - 1) / 2);
-//            delete[] left;
-//            delete[] right;
-//        }
-//        delete[] arr;
-//    }
-//}
 template <typename T>
 void BST<T>::ReSort() {
     if (MaxDepth(m_root, 0) > 1.5 * MinDepth(m_root, 0) || MinDepth(m_root, 0) > 1.5 * MaxDepth(m_root, 0)) {
@@ -463,7 +433,6 @@ T BST<T>::getHelper(T input, TreeNode<T>* node) {
             delete target;
 						-- m_size;
         }
-       //  --m_size; // TAKE AWAY FROM HERE 
     }
 
 

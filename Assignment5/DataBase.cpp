@@ -1,5 +1,5 @@
 #include "DataBase.h"
-#include "BST.h"
+#include "LazyBST.h"
 #include "Faculty.h"
 #include "Student.h"
 #include <fstream>
@@ -61,7 +61,6 @@ void DataBase::PrintaFaculty() {
     }
 }
 
-// Deletes a specific student based on an inputted ID
 // Deletes a specific student based on an inputted ID
 void DataBase::DeleteaStudent() {
     int i = 0;
