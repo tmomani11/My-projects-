@@ -108,7 +108,6 @@ void DataBase::DeleteaFaculty() {
         cout << "No faculty with ID #: " << i << " found in the database." << endl;
     }
 }
-
 void DataBase::RemoveAdvisee() {
     int i;
     int j;
@@ -135,7 +134,6 @@ void DataBase::RemoveAdvisee() {
         cout << "No faculty with ID #: " << j << " found in the database." << endl;
     }
 }
-
 // Changes a student's advisor
 void DataBase::ChangeAdvisor() {
     int i;

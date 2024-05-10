@@ -65,6 +65,7 @@ public:
 
 
 
+
 private:
     TreeNode<T>* m_root;
     int m_size;
@@ -79,9 +80,7 @@ private:
     void findTarget(T key, TreeNode<T>*& target, TreeNode<T>*& parent);
     TreeNode<T>* getSuccessor (TreeNode<T>* rightChild);
 
-    Faculty getFirstInOrder();
 
-    Faculty getFirstInOrder();
 };
 
 
