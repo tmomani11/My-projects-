@@ -17,6 +17,7 @@ DataBase::DataBase() {
 DataBase::~DataBase() {
     delete stree;
     delete ftree;
+    
 }
 
 // Prints all students in the database
@@ -275,3 +276,76 @@ void DataBase::WriteFile() {
 
     treefile.close();
 }
+bool DataBase::MainMenu(){
+    int Selection;
+    bool ChoiceMade = false;
+    cout << "\n"
+         << "=====================================================\n"
+         << "|                     Main Menu                     |\n"
+         << "=====================================================\n"
+         << "|  1  | Print all students and their information    |\n"
+         << "|  2  | Print all faculty and their information     |\n"
+         << "|  3  | Find and display student information        |\n"
+         << "|       (given the student ID)                      |\n"
+         << "|  4  | Find and display faculty information        |\n"
+         << "|       (given the faculty ID)                      |\n"
+         << "|  5  | Add a new student                           |\n"
+         << "|  6  | Delete a student (given the ID)             |\n"
+         << "|  7  | Add a new faculty member                    |\n"
+         << "|  8  | Delete a faculty member (given the ID)      |\n"
+         << "|  9  | Change a student's advisor                  |\n"
+         << "|       (given the student ID and new faculty ID)   |\n"
+         << "| 10  | Remove an advisee from a faculty member     |\n"
+         << "|       (given the IDs)                             |\n"
+         << "| 11  | Exit                                        |\n"
+         << "=====================================================\n"
+         << "Choose an option (1-11): ";
+    cin >> Selection;
+    if(cin.fail()){
+        cin.clear();
+        cin.ignore();
+        cout << "Invalid input. Please enter a number between 1 and 11.\n";
+        return true;
+    }
+    switch (Selection) {
+        case 1:
+            this->StudentPrint();
+            break;
+        case 2:
+            this->FacultyPrint();
+            break;
+        case 3:
+            this->PrintaStudent();
+            break;
+        case 4:
+            this->PrintaFaculty();
+            break;
+        case 5:
+            this->StudentInput();
+            break;
+        case 6:
+            this->DeleteaStudent();
+            break;
+        case 7:
+            this->FacultyInput();
+            break;
+        case 8:
+            this->DeleteaFaculty();
+            break;
+        case 9:
+            this->ChangeAdvisor();
+            break;
+        case 10:
+            this->RemoveAdvisee();
+            break;
+        case 11:
+            this->WriteFile();
+            return false;
+        default:
+            cout << "Invalid input, please enter a valid number." << endl;
+    }
+    return true;
+
+
+}
+

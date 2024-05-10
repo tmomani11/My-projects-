@@ -11,10 +11,7 @@ add_executable(Assignment5
         DataBase.h
         Faculty.cpp
         Faculty.h
-        ListNode.h
         main.cpp
         Student.cpp
         Student.h
-        Menu.cpp
-        Menu.h
 )

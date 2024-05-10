@@ -10,8 +10,8 @@ using namespace std;
 // The DataBase class manages a database of students and faculty.//
 class DataBase {
 public:
-
-
+    // Destructor: Deallocates the memory used by the student and faculty binary search trees.
+    ~DataBase();
     // Prints all students in the database.
     void StudentPrint();
 
@@ -55,14 +55,11 @@ public:
 
     // Constructor: Initializes the student and faculty binary search trees.
     DataBase();
-
-    // Destructor: Deallocates the memory used by the student and faculty binary search trees.
-    ~DataBase();
+    bool MainMenu();
 
 private:
     // Binary search tree of students.
     LazyBST<Student>* stree;
-
     // Binary search tree of faculty.
     LazyBST<Faculty>* ftree;
 };
