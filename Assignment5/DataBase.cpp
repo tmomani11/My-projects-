@@ -9,8 +9,8 @@ using namespace std;
 
 // Constructor: Initializes the student and faculty binary search trees
 DataBase::DataBase() {
-    stree = new BST<Student>();
-    ftree = new BST<Faculty>();
+    stree = new LazyBST<Student>();
+    ftree = new LazyBST<Faculty>();
 }
 
 // Destructor: Deallocates the memory used by the student and faculty binary search trees
@@ -109,7 +109,6 @@ void DataBase::DeleteaFaculty() {
     }
 }
 
-// Removes a student from an advisor's Student tree and sets Student advisor to 0
 void DataBase::RemoveAdvisee() {
     int i;
     int j;
@@ -122,12 +121,16 @@ void DataBase::RemoveAdvisee() {
         Faculty newf = ftree->get(f);
         ftree->remove(f);
         Student s = Student(i);
-        Student news = stree->get(s);
-        stree->remove(s);
-        news.setAdvisor(0);
-        stree->insert(news);
-        newf.RemoveStudent(s);
-        ftree->insert(newf);
+        if (newf.getFacultyStudents()->contains(s)) {
+            Student news = newf.getFacultyStudents()->get(s);
+            newf.RemoveStudent(news); // Remove the student from the faculty's list of students
+            news.setAdvisor(0); // Set the student's advisor to 0
+            cout << "Student with ID #: " << i << " has been removed from the advisor with ID #: " << j << endl;
+            cout << "Note: This student needs a new advisor." << endl;
+            ftree->insert(newf);
+        } else {
+            cout << "No student with ID #: " << i << " found under the faculty with ID #: " << j << endl;
+        }
     } else {
         cout << "No faculty with ID #: " << j << " found in the database." << endl;
     }
@@ -176,6 +179,8 @@ void DataBase::ChangeAdvisor() {
     stree->remove(currentStudent);
     currentStudent.setAdvisor(j);
     stree->insert(currentStudent);
+    cout << "Student " << currentStudent.getStudentName()
+    << " has been reassigned to faculty ID #: " << j << endl;
 }
 
 // Adds a new student to the database

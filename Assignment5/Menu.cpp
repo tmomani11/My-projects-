@@ -1,3 +1,4 @@
+
 #include "Menu.h"
 #include "DataBase.h"
 #include <iostream>
@@ -12,8 +13,8 @@ Menu::~Menu(){
 DataBase database;
 
 bool MainMenu(){
-  int Selection;
-  bool ChoiceMade = false;
+    int Selection;
+    bool ChoiceMade = false;
     cout << "\n"
          << "=====================================================\n"
          << "|                     Main Menu                     |\n"
@@ -35,7 +36,7 @@ bool MainMenu(){
          << "| 11  | Exit                                        |\n"
          << "=====================================================\n"
          << "Choose an option (1-11): ";
-cin >> Selection;
+    cin >> Selection;
     if(cin.fail()){
         cin.clear();
         cin.ignore();

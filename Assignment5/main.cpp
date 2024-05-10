@@ -7,5 +7,5 @@ int main() {
         running = MainMenu();
     }
     cout << "Goodbye!" << endl;
-  return 0;
+    return 0;
 }

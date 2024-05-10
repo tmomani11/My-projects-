@@ -10,7 +10,7 @@ Faculty::Faculty(){
     FacultyName       = "";
     FacultyLevel      = "";
     FacultyDepartment = "";
-    FacultyStudents   = new BST<Student>();
+    FacultyStudents   = new LazyBST<Student>();
 }
 
 // Overloaded constructor: Initializes a new faculty with a given ID and default values for other attributes
@@ -19,7 +19,7 @@ Faculty::Faculty(int i){
     FacultyName       = "";
     FacultyLevel      = "";
     FacultyDepartment = "";
-    FacultyStudents   = new BST<Student>();
+    FacultyStudents   = new LazyBST<Student>();
 }
 
 // Overloaded constructor: Initializes a new faculty with given values for all attributes
@@ -28,7 +28,7 @@ Faculty::Faculty(int FacultyID, string FacultyName, string FacultyLevel, string 
     this->FacultyName  = FacultyName;
     this->FacultyLevel = FacultyLevel;
     this->FacultyDepartment = FacultyDepartment;
-    FacultyStudents = new BST<Student>();
+    FacultyStudents = new LazyBST<Student>();
 }
 
 // Destructor: Currently empty because the BST<Student> is not dynamically allocated
@@ -59,6 +59,9 @@ string Faculty::getFacultyDepartment() const{
 void Faculty::PrintFacultyStudents() const{
     FacultyStudents->printInOrder();
 }
+void Faculty::PrintFacultyStudents(ostream &stream) const {
+    FacultyStudents->writeInOrder(stream);
+}
 
 // Adds a student to this faculty's list of students
 void Faculty::AddStudent(Student S) const{
@@ -77,7 +80,7 @@ bool Faculty::operator>(Faculty &s) const { return (FacultyID > s.FacultyID); }
 bool Faculty::operator==(Faculty &s) const { return (FacultyID == s.FacultyID); }
 
 // Getter for the list of students of this faculty
-BST<Student>* Faculty::getFacultyStudents() const {
+LazyBST<Student>* Faculty::getFacultyStudents() const {
     return FacultyStudents;
 }
 
@@ -88,6 +91,6 @@ ostream &operator<<(ostream &stream, const Faculty& f) {
     stream << "Level: " << f.getFacultyLevel() << endl;
     stream << "Department: " << f.getFacultyDepartment() << endl;
     stream << "Students:" << endl;
-    f.PrintFacultyStudents();
+    f.PrintFacultyStudents(stream);
     return stream;
 }

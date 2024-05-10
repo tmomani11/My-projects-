@@ -10,8 +10,7 @@ using namespace std;
 // The DataBase class manages a database of students and faculty.//
 class DataBase {
 public:
-    // Saves the current state of the database to a file.
-    void SaveToFile();
+
 
     // Prints all students in the database.
     void StudentPrint();
@@ -43,8 +42,7 @@ public:
     // Adds a new faculty to the database.
     void FacultyInput();
 
-    // Prints the student tree.
-    void PrintStudentTree();
+
 
     // Writes all students to an output stream.
     void WriteStudent(ostream& students);
@@ -63,10 +61,10 @@ public:
 
 private:
     // Binary search tree of students.
-    BST<Student>* stree;
+    LazyBST<Student>* stree;
 
     // Binary search tree of faculty.
-    BST<Faculty>* ftree;
+    LazyBST<Faculty>* ftree;
 };
 
 #endif

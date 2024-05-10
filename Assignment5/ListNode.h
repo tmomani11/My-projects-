@@ -8,7 +8,7 @@ class ListNode{
     ListNode(T data);
     virtual ~ListNode();
     T m_data;
-    ListNode<T>* m_next; //recursive data structure b/c it points to instances of itself
+    ListNode<T>* m_next;
     ListNode<T>* m_prev;
 };
 

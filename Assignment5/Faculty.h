@@ -19,6 +19,7 @@ public:
 
     // Getter for faculty department
     string getFacultyDepartment() const;
+    void PrintFacultyStudents(ostream &stream) const ;
 
     // Removes a student from this faculty's list of students
     void RemoveStudent(Student S) const;
@@ -36,7 +37,7 @@ public:
     void AddStudent(Student S) const;
 
     // Getter for the list of students of this faculty
-    BST<Student>* getFacultyStudents() const;
+    LazyBST<Student>* getFacultyStudents() const;
 
     // Default constructor: Initializes a new faculty with default values
     Faculty();
@@ -49,13 +50,13 @@ public:
 
     // Overloaded stream insertion operator for printing a faculty
     friend std::ostream& operator<<(std::ostream &stream, const Faculty& f);
-
     // Destructor: Currently empty because the BST<Student> is not dynamically allocated
     ~Faculty();
 
+
 private:
     // Faculty ID
-    int    FacultyID;
+    int FacultyID;
 
     // Faculty name
     string FacultyName;
@@ -67,7 +68,7 @@ private:
     string FacultyDepartment;
 
     // Binary search tree of students of this faculty
-    BST<Student>* FacultyStudents;
+    LazyBST<Student>* FacultyStudents;
 };
 
 #endif

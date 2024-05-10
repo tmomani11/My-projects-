@@ -5,18 +5,18 @@ using namespace std;
 
 // Default constructor: Initializes a new student with default values
 Student::Student() {
-    StudentID = 0;
-    StudentName = "";
-    StudentLevel = "";
-    StudentMajor = "";
-    StudentGPA = 0;
+    StudentID      = 0;
+    StudentName    = "";
+    StudentLevel   = "";
+    StudentMajor   = "";
+    StudentGPA     = 0;
     StudentAdvisor = 0;
 }
 
 // Overloaded constructor: Initializes a new student with a given ID and default values for other attributes
 Student::Student(int i) {
-    StudentID = i;
-    StudentName = "";
+    StudentID    = i;
+    StudentName  = "";
     StudentLevel = "";
     StudentMajor = "";
     StudentGPA = 0;
@@ -87,3 +87,5 @@ ostream &operator<<(ostream &stream, const Student &s) {
     stream << "Advisor: " << s.getStudentAdvisor() << endl;
     return stream;
 }
+
+

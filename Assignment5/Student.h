@@ -51,24 +51,19 @@ public:
     // Overloaded stream insertion operator for printing a student
     friend std::ostream& operator<<(std::ostream &stream, const Student& s);
 
+
 private:
     // Student ID
     int StudentID;
-
     // Student GPA
     double StudentGPA;
-
     // Student advisor ID
     int StudentAdvisor;
-
     // Student name
     std::string StudentName;
-
     // Student level
     std::string StudentLevel;
-
     // Student major
     std::string StudentMajor;
 };
-
 #endif  // STUDENT_H
