@@ -3,7 +3,6 @@
 
 #include <fstream>
 #include <iostream>
-#include "Faculty.h"
 
 template <typename T>
 class TreeNode{
@@ -65,7 +64,6 @@ public:
 
 
 
-
 private:
     TreeNode<T>* m_root;
     int m_size;
@@ -79,7 +77,6 @@ private:
     T getMinHelper(TreeNode<T>* n);
     void findTarget(T key, TreeNode<T>*& target, TreeNode<T>*& parent);
     TreeNode<T>* getSuccessor (TreeNode<T>* rightChild);
-
 
 };
 

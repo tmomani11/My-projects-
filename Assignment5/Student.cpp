@@ -19,7 +19,7 @@ Student::Student(int i) {
     StudentName  = "";
     StudentLevel = "";
     StudentMajor = "";
-    StudentGPA = 0;
+    StudentGPA    = 0;
     StudentAdvisor = 0;
 }
 

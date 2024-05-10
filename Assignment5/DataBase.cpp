@@ -108,6 +108,7 @@ void DataBase::DeleteaFaculty() {
         cout << "No faculty with ID #: " << i << " found in the database." << endl;
     }
 }
+
 void DataBase::RemoveAdvisee() {
     int i;
     int j;
@@ -120,20 +121,23 @@ void DataBase::RemoveAdvisee() {
         Faculty newf = ftree->get(f);
         ftree->remove(f);
         Student s = Student(i);
-        if (newf.getFacultyStudents()->contains(s)) {
-            Student news = newf.getFacultyStudents()->get(s);
-            newf.RemoveStudent(news); // Remove the student from the faculty's list of students
-            news.setAdvisor(0); // Set the student's advisor to 0
-            cout << "Student with ID #: " << i << " has been removed from the advisor with ID #: " << j << endl;
-            cout << "Note: This student needs a new advisor." << endl;
-            ftree->insert(newf);
-        } else {
-            cout << "No student with ID #: " << i << " found under the faculty with ID #: " << j << endl;
-        }
+        Student news = stree->get(s);
+        stree->remove(s);
+
+        // Set the advisor ID to 0
+        news.setAdvisor(0);
+        stree->insert(news);
+        newf.RemoveStudent(s);
+        ftree->insert(newf);
+
+        // Print statement indicating the student no longer has an advisor
+        cout << "Student with ID #: " << i << " has been removed from the advisor with ID #: " << j << endl;
+        cout << "Note: This student needs a new advisor." << endl;
     } else {
         cout << "No faculty with ID #: " << j << " found in the database." << endl;
     }
 }
+
 // Changes a student's advisor
 void DataBase::ChangeAdvisor() {
     int i;
